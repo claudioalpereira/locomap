@@ -1,0 +1,1 @@
+C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\DBNotify\obj\Debug\DBNotify.csprojResolveAssemblyReference.cache

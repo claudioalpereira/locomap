@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.css' rel='stylesheet' />
+	
+	<style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+//mapboxgl.accessToken = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2xlYWxwIiwiYSI6ImNpb3B3cm5rOTAwMDB3OG1ib2h6cTV0M3UifQ.pwjQ3N47PhI5H2Amch1IGQ';
+var map = new mapboxgl.Map({
+    container: 'map',
+    //style: 'mapbox://styles/mapbox/streets-v9',
+    style: 'mapbox://styles/clealp/ciopx36on000yepncv9d50zhb',
+    zoom: 0
+});
+
+var url = 'https://wanderdrone.appspot.com/';
+	//map.setStyle('mapbox://styles/mapbox/light-v9');
+map.on('load', function () {
+    
+	/*
+	window.setInterval(function() {
+		update();
+    }, 2000);
+*/
+    
+	map.addSource('drone', { type: 'geojson', data: url });
+    map.addLayer({
+        "id": "drone",
+        "type": "symbol",
+        "source": "drone",
+        "layout": {
+            "icon-image": "rocket-15"
+        }
+    });
+});
+
+function update(){
+	map.getSource('drone').setData(url);
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,639 @@
+﻿
+@{
+    ViewBag.Title = "Map4";
+    Layout = "../Shared/_Layout2.cshtml";
+    var ran = new Random(DateTime.Now.Millisecond);
+    var loco = 4700;
+}
+
+
+    <style>
+                    /*
+
+        RESPONSTABLE 2.0 by jordyvanraaij
+          Designed mobile first!
+
+        If you like this solution, you might also want to check out the 1.0 version:
+          https://gist.github.com/jordyvanraaij/9069194
+
+        */
+                    .responstable {
+                        margin: 0em 0;
+                        width: 100%;
+                        overflow: hidden;
+                        background: #FFF;
+                        color: #024457;
+                        border-radius: 10px;
+                        border: 1px solid #167F92;
+                    }
+
+                        .responstable tr {
+                            border: 1px solid #D9E4E6;
+                        }
+
+                            .responstable tr:nth-child(odd) {
+                                background-color: #EAF3F3;
+                            }
+
+                        .responstable th {
+                            display: none;
+                            border: 1px solid #FFF;
+                            background-color: #167F92;
+                            color: #FFF;
+                            padding: 1em;
+                        }
+
+                            .responstable th:first-child {
+                                display: table-cell;
+                                text-align: center;
+                            }
+
+                            .responstable th:nth-child(2) {
+                                display: table-cell;
+                            }
+
+                                .responstable th:nth-child(2) span {
+                                    display: none;
+                                }
+
+                                .responstable th:nth-child(2):after {
+                                    content: attr(data-th);
+                                }
+
+                    @@media (min-width: 480px) {
+                        .responstable th:nth-child(2) span {
+                            display: block;
+                        }
+
+                        .responstable th:nth-child(2):after {
+                            display: none;
+                        }
+                    }
+
+                    .responstable td {
+                        display: block;
+                        word-wrap: break-word;
+                        max-width: 7em;
+                    }
+
+                        .responstable td:first-child {
+                            display: table-cell;
+                            text-align: center;
+                            border-right: 1px solid #D9E4E6;
+                        }
+
+                    @@media (min-width: 480px) {
+                        .responstable td {
+                            border: 1px solid #D9E4E6;
+                        }
+                    }
+
+                    .responstable th, .responstable td {
+                        text-align: left;
+                        margin: .5em 1em;
+                    }
+
+                    @@media (min-width: 480px) {
+                        .responstable th, .responstable td {
+                            display: table-cell;
+                            padding: 1em;
+                        }
+                    }
+
+                    body {
+                        padding: 0 2em;
+                        font-family: Arial, sans-serif;
+                        color: #024457;
+                        background: #f2f2f2;
+                        background: rgb(238,238,238);
+                    }
+
+                    h1 {
+                        font-family: Verdana;
+                        font-weight: normal;
+                        color: #024457;
+                    }
+
+                        h1 span {
+                            color: #167F92;
+                        }
+    </style>
+@*
+        <style>
+
+    h1{
+      font-size: 30px;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 300;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    table{
+      width:100%;
+      table-layout: fixed;
+    }
+    .tbl-header{
+      background-color: rgba(255,255,255,0.3);
+     }
+    .tbl-content{
+      height:300px;
+      overflow-x:auto;
+      margin-top: 0px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    th{
+      padding: 20px 15px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 12px;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    td{
+      padding: 15px;
+      text-align: left;
+      vertical-align:middle;
+      font-weight: 300;
+      font-size: 12px;
+      color: #fff;
+      border-bottom: solid 1px rgba(255,255,255,0.1);
+    }
+
+
+    /* demo styles */
+
+    @@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+    body{
+      background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+      background: linear-gradient(to right, #25c481, #25b7c4);
+      font-family: 'Roboto', sans-serif;
+    }
+    section{
+      margin: 50px;
+    }
+
+
+    /* follow me template */
+    .made-with-love {
+      margin-top: 40px;
+      padding: 10px;
+      clear: left;
+      text-align: center;
+      font-size: 10px;
+      font-family: arial;
+      color: #fff;
+    }
+    .made-with-love i {
+      font-style: normal;
+      color: #F50057;
+      font-size: 14px;
+      position: relative;
+      top: 2px;
+    }
+    .made-with-love a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .made-with-love a:hover {
+      text-decoration: underline;
+    }
+
+
+    /* for custom scrollbar for webkit browser*/
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+        </style>
+*@
+
+    <style>
+        /* https://stackoverflow.com/questions/11677886/twitter-bootstrap-div-in-container-with-100-height */
+        html, body, #map-container, #map-row, #map{
+            min-height:100%;
+            height:100%;
+        }
+            
+        body {
+          /*padding-top: 4.5rem;*/
+          padding-top: 4.5rem;
+          padding-left:0px;
+          padding-right:0px;
+        }
+        #map-container{
+          padding-left:0px;
+          padding-right:0px;
+
+        }
+      
+    
+        /* https://gis.stackexchange.com/questions/62491/sizing-leaflet-map-inside-bootstrap    
+        tr {
+            width: 100%;
+            display: inline-table;
+            table-layout: fixed;
+        }
+
+        table{
+            height:100%;              // <-- Select the height of the table
+            display: -moz-groupbox;    // Firefox Bad Effect
+        }
+        tbody{
+            overflow-y: scroll;      
+            height: 100%;            //  <-- Select the height of the body
+            width: 100%;
+            position: absolute;
+        }
+     */
+    </style>
+
+    
+    @* Content *@
+    <div id="map-container" class="container-fluid no-gutters">
+        <div id="map-row" class="row no-gutters">
+            <div id="map" class="col-sm-4 rounded">
+                
+            </div>
+            <div class="col-sm-8" style="overflow-y:scroll;">
+                <table class=" responstable text-center">
+                    <thead class="thead-default">
+                        @*<tr>
+        <th rowspan="2">Loco</th>
+        <th rowspan="2" class="text-center">Mileage</th>
+        <th colspan="2" class="text-center">E. Consumida</th>
+        <th colspan="2" class="text-center">E. Devolvida</th>
+    </tr>
+                        *@<tr>
+                            <th>Loco</th>
+                            <th>Km</th>
+                            <th class="text-center">Activa</th>
+                            <th class="text-center">Reactiva</th>
+                            <th class="text-center">Activa</th>
+                            <th class="text-center">Reactiva</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">@(++loco)</th>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                            <td>@(ran.Next(5, 1000) * 1000)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+     
+
+          <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+        @Scripts.Render("~/bundles/jquery")
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
+        @*
+            +++++++++++++++++++++++++++++++++++++++++++++
+                page js
+            +++++++++++++++++++++++++++++++++++++++++++++
+        *@
+    <script>
+
+        var locos = [];
+
+       
+    </script>    
+    
+    @*
+        +++++++++++++++++++++++++++++++++++++++++++++
+            Leaflet
+        +++++++++++++++++++++++++++++++++++++++++++++
+    *@
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+            integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+            crossorigin=""></script>
+
+    <script>
+
+      
+
+ 
+        @* INIT *@
+
+   
+
+        var mymap = L.map('map').setView([39.67696, -8.1447127], 7);
+        mymap.dragging.disable();
+
+        var locoIcon = L.icon({
+            iconUrl: 'Content/mapbox/train.gif',
+            iconSize: [11, 13], // size of the icon
+            iconAnchor: [5, 6], // point of the icon which will correspond to marker's location
+            popupAnchor: [0, -6] // point from which the popup should open relative to the iconAnchor
+        });
+        var markers = [];
+        var token = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>',
+            maxZoom: 18,
+            id: 'mapbox.light',
+            accessToken: token
+        }).addTo(mymap);
+
+
+        function updateMarker(loco, marker) {
+
+            marker.setLatLng({ lat: loco.Latitude, lng: loco.Longitude });
+            marker.setIcon(locoIcon);
+            marker.bindPopup(loco.Loco);
+            marker.Loco = loco.Loco;
+
+            return marker;
+        }
+
+        function updateMarkers() {
+
+            // apagar markers
+            markers.forEach(function (m) {
+                if ($.inArray(m.Loco, locos.map(function (l) { return l.Loco; })) == -1) {
+                    markers.pop(m);
+                    m.removeFrom(mymap);
+                }
+            });
+
+            locos.forEach(function (l) {
+                // not supported on IE
+                //var m = markers.find(function (e) { return e.Loco == l.Loco; }); 
+                var m = $.grep(markers, function (e) { return e.Loco == l.Loco; })[0];
+                if (!m) {
+                    m = updateMarker(l, new L.marker());
+                    markers.push(m);
+                    m.addTo(mymap);
+                } else {
+                    m.setLatLng({ lat: l.Latitude, lng: l.Longitude });
+                }
+            });
+
+            var group = new L.featureGroup(markers);
+            mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
+        }
+
+    </script>
+
+
+    @*
+        +++++++++++++++++++++++++++++++++++++++++++++
+            SignalR
+        +++++++++++++++++++++++++++++++++++++++++++++
+    *@
+    <script src="/Scripts/jquery.signalR-2.2.2.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="/signalr/hubs"></script>
+
+    <script type="text/javascript">
+
+    $(function () {
+        // Declare a proxy to reference the hub.
+        var notifications = $.connection.messagesHub;
+
+        //debugger;
+        // Create a function that the hub can call to broadcast messages.
+        notifications.client.updateMessages = function () {
+            getAllMessages()
+        };
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+            console.log("connection started");
+            getAllMessages();
+        }).fail(function (e) {
+            alert(e);
+        });
+    });
+
+    function getAllMessages()
+    {
+        //var tbl = $('#messagesTable');
+        $.ajax({
+            url: 'home/GetMessages',
+            contentType: 'application/html ; charset:utf-8',
+            type: 'GET',
+            dataType: 'html'
+        }).success(function (result) {
+
+            locos = JSON.parse(result);
+            updateMarkers();
+
+        }).error(function () {
+            alert('ERROR retrieving data from the server');
+        });
+    }
+
+    </script>
