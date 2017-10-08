@@ -78,7 +78,7 @@ namespace MVCSignalRtest2
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 0;
+            manager.MaxFailedAccessAttemptsBeforeLockout = 3;
             
             
 
