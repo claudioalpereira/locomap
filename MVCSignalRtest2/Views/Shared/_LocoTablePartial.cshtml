@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MVCSignalRtest2.Models.LocoStatus>
+
+<table id="locoTable" class=" responstable text-center">
+    <thead class="thead-default">
+        @*<tr>
+                <th rowspan="2">Loco</th>
+                <th rowspan="2" class="text-center">Mileage</th>
+                <th colspan="2" class="text-center">E. Consumida</th>
+                <th colspan="2" class="text-center">E. Devolvida</th>
+            </tr>
+        *@
+        <tr>
+            <th>Loco</th>
+            <th class="text-center"><span class="hide-when-small">Km</span></th>
+            @*<th class="text-center">Horas</th>*@
+            <th class="text-center">E. Activa Recebida</th>
+            <th class="text-center">E. Reactiva Recebida</th>
+            <th class="text-center">E. Activa Devolvida</th>
+            <th class="text-center">E. Reactiva Devolvida</th>
+            <th class="text-center">Uptime</th>
+            <th class="text-center">Actualização</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var loco in Model.OrderBy(x => x.Loco))
+        {
+            @Html.Partial("_LocoTableRowPartial", loco);
+        }
+
+    </tbody>
+</table>

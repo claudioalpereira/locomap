@@ -13,7 +13,14 @@ namespace MVCSignalRtest2.Controllers
     {
         public ActionResult Index(string view)
         {
+           
             return View(view??"Map4");
+        }
+
+        public ActionResult GetLocos()
+        {
+            var ms = MessagesRepository.GetAllMessages();
+            return PartialView("_LocoTablePartial", ms);
         }
 
         public ActionResult About()

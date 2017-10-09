@@ -1,13 +1,12 @@
 ﻿
 @{
+
     ViewBag.Title = "Map4";
     Layout = "../Shared/_Layout2.cshtml";
-    var ran = new Random(DateTime.Now.Millisecond);
-    var loco = 4700;
+
 }
 
 
-@Scripts.Render("~/bundles/jquery")
 
 @* table specific *@
 <link rel="stylesheet" href="~/Content/tablestyle1.css">
@@ -34,6 +33,32 @@
           padding-left:0px;
           padding-right:0px;
 
+        }
+        
+        .locoprop-name{
+            display:none;
+        }
+
+      
+            
+        @@media (max-width: 480px) {
+            .locoprop-name{
+                display:table-cell;
+            }
+            .responstable th:nth-child(2) .hide-when-small{
+               display:none;
+            }
+
+            /* make Loco column skinny on mobile view */
+            /*tbody > tr:nth-child(1) > th, .responstable th:nth-child(1){*/
+            th, td{
+                padding:0px;
+                margin:0px;
+                background-color:red;
+            }
+            td{
+                margin:4px;
+            }
         }
 
 
@@ -65,226 +90,7 @@
 
             </div>
             <div id="table_wrapper" class="col-sm-8" style="overflow-y:scroll;">
-                <table id="locoTable" class=" responstable text-center">
-                    <thead class="thead-default">
-                        @*<tr>
-        <th rowspan="2">Loco</th>
-        <th rowspan="2" class="text-center">Mileage</th>
-        <th colspan="2" class="text-center">E. Consumida</th>
-        <th colspan="2" class="text-center">E. Devolvida</th>
-    </tr>
-                        *@<tr>
-                            <th>Loco</th>
-                            <th>Km</th>
-                            <th class="text-center">Activa</th>
-                            <th class="text-center">Reactiva</th>
-                            <th class="text-center">Activa</th>
-                            <th class="text-center">Reactiva</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">@(++loco)</th>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                            <td>@(ran.Next(5, 1000) * 1000)</td>
-                        </tr>
-                    </tbody>
-                </table>
+               
             </div>
         </div>
     </div>
@@ -294,7 +100,7 @@
           <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
-      
+        @Scripts.Render("~/bundles/jquery")
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
@@ -308,6 +114,18 @@
 
         var locos = [];
 
+        function updateTable() {
+            $.ajax({
+
+                url: '@Url.Action("GetLocos", "Home")',
+                type: "GET",
+                dataType: "html",
+                //data: { id: 1 },//this is as per your requirement
+                success: function (data) {
+                    $('#table_wrapper').html(data);
+                },
+            });
+        }
 
     </script>
 
@@ -433,6 +251,7 @@
 
             locos = JSON.parse(result);
             updateMarkers();
+            updateTable();
 
         }).error(function () {
             alert('ERROR retrieving data from the server');
@@ -441,8 +260,24 @@
 
     </script>
 
+@* 
+        +++++++++++++++++++++++++++++++++++++++++++++
+        Export to xls 
+        +++++++++++++++++++++++++++++++++++++++++++++
+*@
+
 <script>
     @* https://codepen.io/kostas-krevatas/pen/mJyBwp *@
+
+    var elems;
+    // My
+    Node.prototype.filterByClass = function(classname){
+        elems = this.getElementsByClassName(classname);
+        [].forEach.call(elems, function (e) {
+            this.removeChild(e);
+        });
+    }
+
     $(document).ready(function () {
         $("#btnExport").click(function (e) {
             e.preventDefault();
@@ -452,9 +287,15 @@
             var table_div = document.getElementById('table_wrapper');
             var table_html = table_div.outerHTML.replace(/ /g, '%20');
 
+            
+            var xxx = $('#table_wrapper').clone();
+            xxx.find('.no-export').remove();
+            var table_html2 = xxx.html().replace(/ /g, '%20');
+
+
             var d = new Date();
             var a = document.createElement('a');
-            a.href = data_type + ', ' + table_html;
+            a.href = data_type + ', ' + table_html2;
             a.download = 'locos_' + d.getFullYear() + (d.getUTCMonth() + 1) + d.getUTCDate() + '_' + d.getHours() + d.getMinutes() + '.xls';
             a.click();
         });
