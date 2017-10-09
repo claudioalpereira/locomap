@@ -117,23 +117,4 @@ h1 span {
 
 
 
-       
-        @media (max-width: 480px) {
-            .locoprop-name{
-                display:table-cell;
-            }
-            .responstable th:nth-child(2) .hide-when-small{
-               display:none;
-            }
-
-            /* make Loco column skinny on mobile view */
-            /*tbody > tr:nth-child(1) > th, .responstable th:nth-child(1){*/
-            th, td{
-                padding:0px;
-                margin:0px;
-                background-color:red;
-            }
-            td{
-                margin:4px;
-            }
-        }
+     
