@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
-using MVCSignalRtest2.Models;
 
 namespace MVCSignalRtest2
 {
-    public static class MailSender
+    public class MailSender
     {
-        public static void SendMail(string body)
+        public static void Send(string subject, string htmlBody)
         {
-            var email = new Email
-            {
-                To = "claudio.leal.pereira@gmail.com",
-                UserName = "myUserName",
-                Comment = body
-            };
-
-            email.Send();
+            SmtpClient SmtpServer = new SmtpClient("smtp.live.com");
+            var mail = new MailMessage();
+           // mail.From = new MailAddress("claudio_leal@hotmail.com");
+            mail.To.Add("claudio.leal.pereira@gmail.com");
+            mail.Subject = subject;
+            mail.IsBodyHtml = true;
+            mail.Body = htmlBody;
+            //SmtpServer.Port = 587;
+            //SmtpServer.UseDefaultCredentials = false;
+            //SmtpServer.Credentials = new System.Net.NetworkCredential("claudio_leal@hotmail.com", "anasofia");
+            //SmtpServer.EnableSsl = true;
+            SmtpServer.Send(mail);
         }
     }
 }

@@ -27,6 +27,7 @@ namespace MVCSignalRtest2
         protected void Application_Error()
         {
             var ex = Server.GetLastError();
+          
             //log the error!
             //_Logger.Error(ex);
         }

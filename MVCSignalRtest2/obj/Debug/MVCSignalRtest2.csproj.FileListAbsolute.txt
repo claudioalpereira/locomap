@@ -74,8 +74,6 @@ C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSigna
 C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\SendGrid.dll
 C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\SendGrid.pdb
 C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\SendGrid.xml
-C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\Postal.dll
 C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\RazorEngine.dll
-C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\Postal.xml
 C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\RazorEngine.pdb
 C:\Users\z003m7uz\documents\visual studio 2015\Projects\MVCSignalRtest2\MVCSignalRtest2\bin\RazorEngine.xml

@@ -124,7 +124,7 @@ namespace MVCSignalRtest2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    MailSender.SendMail(model.Code);
+                  
                     return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
