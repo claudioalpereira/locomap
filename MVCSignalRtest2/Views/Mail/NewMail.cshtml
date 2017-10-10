@@ -1,0 +1,14 @@
+﻿@model MVCSignalRtest2.Models.Email
+
+@{
+    Layout = null;
+}
+
+To: @Model.To
+From: mailer@example.com
+Subject: New comment posted
+
+Hello,
+There is a new comment from @Model.UserName:
+
+@Model.Comment

@@ -42,5 +42,7 @@ namespace MVCSignalRtest2.Controllers
             var ms = MessagesRepository.GetAllMessages();
             return Json(ms, JsonRequestBehavior.AllowGet);
         }
+
+        
     }
 }

@@ -11,258 +11,251 @@
 @* table specific *@
 <link rel="stylesheet" href="~/Content/tablestyle1.css">
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+      integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+      crossorigin="" />
 
 
 
 
 
-    <style>
-        /* https://stackoverflow.com/questions/11677886/twitter-bootstrap-div-in-container-with-100-height */
-        html, body, #map-container, #map-row, #map{
-            min-height:100%;
-            height:100%;
-        }
 
-        body {
-          /*padding-top: 4.5rem;*/
-          padding-top: 4.5rem;
-          padding-left:0px;
-          padding-right:0px;
-        }
-        #map-container{
-          padding-left:0px;
-          padding-right:0px;
+<style>
+    /* https://stackoverflow.com/questions/11677886/twitter-bootstrap-div-in-container-with-100-height */
+    #map-container, #map-row, #map{
+        min-height:100%;
+        height:100%;
+    }
 
-        }
+    body {
+        /*padding-top: 4.5rem;*/
+        padding-top: 4.5rem;
+        padding-left:0px;
+        padding-right:0px;
+    }
+    #map-container{
+        padding-left:0px;
+        padding-right:0px;
+
+    }
         
-        .locoprop-name{
-            display:none;
-        }
+    .locoprop-name{
+        display:none;
+    }
 
       
             
-        @@media (max-width: 480px) {
-            .locoprop-name{
-                display:table-cell;
-            }
-            .responstable th:nth-child(2) .hide-when-small{
-               display:none;
-            }
-
-            /* make Loco column skinny on mobile view */
-            /*tbody > tr:nth-child(1) > th, .responstable th:nth-child(1){*/
-            th, td{
-                padding:0px;
-                margin:0px;
-            }
-            td{
-                margin:4px;
-            }
+    @@media (max-width: 480px) {
+        .locoprop-name{
+            display:table-cell;
+        }
+        .responstable th:nth-child(2) .hide-when-small{
+            display:none;
         }
 
-
-        /* https://gis.stackexchange.com/questions/62491/sizing-leaflet-map-inside-bootstrap
-        tr {
-            width: 100%;
-            display: inline-table;
-            table-layout: fixed;
+        /* make Loco column skinny on mobile view */
+        /*tbody > tr:nth-child(1) > th, .responstable th:nth-child(1){*/
+        th, td{
+            display : flex;
+            padding:0px;
+            margin:0px;
         }
-
-        table{
-            height:100%;              // <-- Select the height of the table
-            display: -moz-groupbox;    // Firefox Bad Effect
+        td{
+            margin:4px;
         }
-        tbody{
-            overflow-y: scroll;
-            height: 100%;            //  <-- Select the height of the body
-            width: 100%;
-            position: absolute;
-        }
-     */
-    </style>
+    }
 
 
-    @* Content *@
-    <div id="map-container" class="container-fluid no-gutters">
-        <div id="map-row" class="row no-gutters">
-            <div id="map" class="col-sm-4 rounded">
+    /* https://gis.stackexchange.com/questions/62491/sizing-leaflet-map-inside-bootstrap
+    tr {
+        width: 100%;
+        display: inline-table;
+        table-layout: fixed;
+    }
 
-            </div>
-            <div id="table_wrapper" class="col-sm-8" style="overflow-y:scroll;">
+    table{
+        height:100%;              // <-- Select the height of the table
+        display: -moz-groupbox;    // Firefox Bad Effect
+    }
+    tbody{
+        overflow-y: scroll;
+        height: 100%;            //  <-- Select the height of the body
+        width: 100%;
+        position: absolute;
+    }
+    */
+</style>
+
+
+@* Content *@
+<div id="map-container" class="container-fluid no-gutters">
+    <div id="map-row" class="row no-gutters">
+        <div id="map" class="col-sm-4 rounded">
+
+        </div>
+        <div id="table_wrapper" class="col-sm-8" style="overflow-y:scroll;">
                
-            </div>
         </div>
     </div>
+</div>
 
 
-
-          <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
-        @Scripts.Render("~/bundles/jquery")
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+@section scripts{
 
 
-        @*
-            +++++++++++++++++++++++++++++++++++++++++++++
-                page js
-            +++++++++++++++++++++++++++++++++++++++++++++
-        *@
-    <script>
+@*
+    +++++++++++++++++++++++++++++++++++++++++++++
+        page js
+    +++++++++++++++++++++++++++++++++++++++++++++
+*@
+    
+<script>
 
-        var locos = [];
+    var locos = [];
 
-        function updateTable() {
-            $.ajax({
-
-                url: '@Url.Action("GetLocos", "Home")',
-                type: "GET",
-                dataType: "html",
-                //data: { id: 1 },//this is as per your requirement
-                success: function (data) {
-                    $('#table_wrapper').html(data);
-                },
-            });
-        }
-
-    </script>
-
-    @*
-        +++++++++++++++++++++++++++++++++++++++++++++
-            Leaflet
-        +++++++++++++++++++++++++++++++++++++++++++++
-    *@
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-          crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-            integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-            crossorigin=""></script>
-
-    <script>
-
-
-
-
-        @* INIT *@
-
-
-
-        var mymap = L.map('map').setView([39.67696, -8.1447127], 7);
-        mymap.dragging.disable();
-
-        var locoIcon = L.icon({
-            iconUrl: 'Content/mapbox/train.gif',
-            iconSize: [11, 13], // size of the icon
-            iconAnchor: [5, 6], // point of the icon which will correspond to marker's location
-            popupAnchor: [0, -6] // point from which the popup should open relative to the iconAnchor
-        });
-        var markers = [];
-        var token = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
-
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>',
-            maxZoom: 18,
-            id: 'mapbox.light',
-            accessToken: token
-        }).addTo(mymap);
-
-
-        function updateMarker(loco, marker) {
-
-            marker.setLatLng({ lat: loco.Latitude, lng: loco.Longitude });
-            marker.setIcon(locoIcon);
-            marker.bindPopup(loco.Loco);
-            marker.Loco = loco.Loco;
-
-            return marker;
-        }
-
-        function updateMarkers() {
-
-            // apagar markers
-            markers.forEach(function (m) {
-                if ($.inArray(m.Loco, locos.map(function (l) { return l.Loco; })) == -1) {
-                    markers.pop(m);
-                    m.removeFrom(mymap);
-                }
-            });
-
-            locos.forEach(function (l) {
-                // not supported on IE
-                //var m = markers.find(function (e) { return e.Loco == l.Loco; });
-                var m = $.grep(markers, function (e) { return e.Loco == l.Loco; })[0];
-                if (!m) {
-                    m = updateMarker(l, new L.marker());
-                    markers.push(m);
-                    m.addTo(mymap);
-                } else {
-                    m.setLatLng({ lat: l.Latitude, lng: l.Longitude });
-                }
-            });
-
-            var group = new L.featureGroup(markers);
-            mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
-        }
-
-    </script>
-
-
-    @*
-        +++++++++++++++++++++++++++++++++++++++++++++
-            SignalR
-        +++++++++++++++++++++++++++++++++++++++++++++
-    *@
-    <script src="/Scripts/jquery.signalR-2.2.2.js"></script>
-    <!--Reference the autogenerated SignalR hub script. -->
-    <script src="/signalr/hubs"></script>
-
-    <script type="text/javascript">
-
-    $(function () {
-        // Declare a proxy to reference the hub.
-        var notifications = $.connection.messagesHub;
-
-        //debugger;
-        // Create a function that the hub can call to broadcast messages.
-        notifications.client.updateMessages = function () {
-            getAllMessages()
-        };
-        // Start the connection.
-        $.connection.hub.start().done(function () {
-            console.log("connection started");
-            getAllMessages();
-        }).fail(function (e) {
-            alert(e);
-        });
-    });
-
-    function getAllMessages()
-    {
-        //var tbl = $('#messagesTable');
+    function updateTable() {
         $.ajax({
-            url: 'home/GetMessages',
-            contentType: 'application/html ; charset:utf-8',
-            type: 'GET',
-            dataType: 'html'
-        }).success(function (result) {
 
-            locos = JSON.parse(result);
-            updateMarkers();
-            updateTable();
-
-        }).error(function () {
-            alert('ERROR retrieving data from the server');
+            url: '@Url.Action("GetLocos", "Home")',
+            type: "GET",
+            dataType: "html",
+            //data: { id: 1 },//this is as per your requirement
+            success: function (data) {
+                $('#table_wrapper').html(data);
+            },
         });
     }
 
-    </script>
+</script>
+
+@*
+    +++++++++++++++++++++++++++++++++++++++++++++
+        Leaflet
+    +++++++++++++++++++++++++++++++++++++++++++++
+*@
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+        crossorigin=""></script>
+
+
+<script>
+
+    @* INIT *@
+
+    var mymap = L.map('map').setView([39.67696, -8.1447127], 7);
+    mymap.dragging.disable();
+
+    var locoIcon = L.icon({
+        iconUrl: 'Content/mapbox/train.gif',
+        iconSize: [11, 13], // size of the icon
+        iconAnchor: [5, 6], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -6] // point from which the popup should open relative to the iconAnchor
+    });
+    var markers = [];
+    var token = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>',
+        maxZoom: 18,
+        id: 'mapbox.light',
+        accessToken: token
+    }).addTo(mymap);
+
+
+    function updateMarker(loco, marker) {
+
+        marker.setLatLng({ lat: loco.Latitude, lng: loco.Longitude });
+        marker.setIcon(locoIcon);
+        marker.bindPopup(loco.Loco);
+        marker.Loco = loco.Loco;
+
+        return marker;
+    }
+
+    function updateMarkers() {
+
+        // apagar markers
+        markers.forEach(function (m) {
+            if ($.inArray(m.Loco, locos.map(function (l) { return l.Loco; })) == -1) {
+                markers.pop(m);
+                m.removeFrom(mymap);
+            }
+        });
+
+        locos.forEach(function (l) {
+           
+            //var m = markers.find(function (e) { return e.Loco == l.Loco; }); // not supported on IE
+            var m = $.grep(markers, function (e) { return e.Loco == l.Loco; })[0];
+            if (!m) {
+                m = updateMarker(l, new L.marker());
+                markers.push(m);
+                m.addTo(mymap);
+            } else {
+                m.setLatLng({ lat: l.Latitude, lng: l.Longitude });
+            }
+        });
+
+        var group = new L.featureGroup(markers);
+        mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
+    }
+
+</script>
+
+
+@*
+    +++++++++++++++++++++++++++++++++++++++++++++
+        SignalR
+    +++++++++++++++++++++++++++++++++++++++++++++
+*@
+<script src="/Scripts/jquery.signalR-2.2.2.js"></script>
+<!--Reference the autogenerated SignalR hub script. -->
+<script src="/signalr/hubs"></script>
+
+<script type="text/javascript">
+
+$(function () {
+    // Declare a proxy to reference the hub.
+    var notifications = $.connection.messagesHub;
+
+    //debugger;
+    // Create a function that the hub can call to broadcast messages.
+    notifications.client.updateMessages = function () {
+        getAllMessages()
+    };
+    // Start the connection.
+    $.connection.hub.start().done(function () {
+        console.log("connection started");
+        getAllMessages();
+    }).fail(function (e) {
+        alert(e);
+    });
+});
+
+function getAllMessages()
+{
+    //var tbl = $('#messagesTable');
+    $.ajax({
+        url: 'home/GetMessages',
+        contentType: 'application/html ; charset:utf-8',
+        type: 'GET',
+        dataType: 'html'
+    }).success(function (result) {
+
+        locos = JSON.parse(result);
+        updateMarkers();
+        updateTable();
+
+    }).error(function () {
+        alert('ERROR retrieving data from the server');
+    });
+}
+
+</script>
 
 @* 
-        +++++++++++++++++++++++++++++++++++++++++++++
-        Export to xls 
-        +++++++++++++++++++++++++++++++++++++++++++++
+    +++++++++++++++++++++++++++++++++++++++++++++
+    Export to xls 
+    +++++++++++++++++++++++++++++++++++++++++++++
 *@
 
 <script>
@@ -283,12 +276,9 @@
 
             //getting data from our table
             var data_type = 'data:application/vnd.ms-excel';
-            var table_div = document.getElementById('table_wrapper');
-            var table_html = table_div.outerHTML.replace(/ /g, '%20');
-
-            
-            var xxx = $('#table_wrapper').clone();
-            xxx.find('.no-export').remove();
+           
+            var table_div = $('#table_wrapper').clone();
+            table_div.find('.no-export').remove();
             var table_html2 = xxx.html().replace(/ /g, '%20');
 
 
@@ -300,3 +290,6 @@
         });
     });
 </script>
+}
+
+

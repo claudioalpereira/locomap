@@ -24,6 +24,13 @@ namespace MVCSignalRtest2
             SqlDependency.Start(connString);
         }
 
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            //log the error!
+            //_Logger.Error(ex);
+        }
+
         protected void Application_End()
         {
             //Stop SQL dependency

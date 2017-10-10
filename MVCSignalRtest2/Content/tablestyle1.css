@@ -61,7 +61,7 @@ https://gist.github.com/jordyvanraaij/9069194
 }
 
 .responstable td {
-    display: block;
+    display: flex;
     word-wrap: break-word;
     max-width: 7em;
 }
