@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVCSignalRtest2.Models;
+using MVCSignalRtest2.Log;
 
 namespace MVCSignalRtest2.Controllers
 {
@@ -67,9 +68,11 @@ namespace MVCSignalRtest2.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
+
+        { Logger.Log("login from user'{0}'", model.Email);
             if (!ModelState.IsValid)
             {
+                
                 return View(model);
             }
 

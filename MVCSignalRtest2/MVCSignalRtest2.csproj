@@ -192,7 +192,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\MessagesHub.cs" />
-    <Compile Include="MailSender.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Log\MailSender.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocoStatus.cs" />

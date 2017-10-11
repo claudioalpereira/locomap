@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using MVCSignalRtest2.Log;
 
 namespace MVCSignalRtest2.Controllers
 {
