@@ -15,19 +15,17 @@ namespace MVCSignalRtest2.Log
 
             SmtpClient SmtpServer = new SmtpClient();
 
-            var recipients = ConfigurationManager.AppSettings["alertRecipients"].Split(',').Select(x => x.Trim()).ToList();
+            var recipients = ConfigurationManager.AppSettings["mail_alertRecipients"].Split(',').Select(x => x.Trim()).ToList();
 
             recipients.ForEach(recipient => {
                 var mail = new MailMessage();
 
                 mail.To.Add(recipient);
-                mail.Subject = subject;
+                mail.Subject = "IFM | " + subject;
                 mail.IsBodyHtml = true;
                 mail.Body = htmlBody;
                 SmtpServer.Send(mail);                              
             });
-
-            
         }
     }
 }

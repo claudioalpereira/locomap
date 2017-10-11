@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCSignalRtest2.Log;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -29,7 +30,16 @@ namespace MVCSignalRtest2
             var ex = Server.GetLastError();
           
             //log the error!
-            //_Logger.Error(ex);
+            Logger.Log(ex);
+
+            try
+            {
+                MailSender.Send("Uma excepção foi amandada!", ex.ToString());
+            }
+            catch (Exception e)
+            {
+                Logger.Log(e);
+            }
         }
 
         protected void Application_End()

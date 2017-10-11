@@ -206,13 +206,19 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\map.css" />
+    <Content Include="Content\bootstrap4.0.0.beta.min.css" />
+    <Content Include="Content\img\4701.png" />
+    <Content Include="Content\img\siemens_anomated.gif" />
+    <Content Include="Content\img\sie_ingenuity_logo.png" />
+    <Content Include="Content\img\train.gif" />
+    <Content Include="Content\leaflet-1.2.0.css" />
     <Content Include="Content\tablestyle1.css" />
     <Content Include="Content\tablestyle2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-4.0.0.beta.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\siemenslogo.ttf" />
@@ -226,7 +232,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\leaflet-1.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper-1.11.0.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

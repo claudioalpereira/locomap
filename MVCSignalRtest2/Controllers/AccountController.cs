@@ -72,7 +72,6 @@ namespace MVCSignalRtest2.Controllers
         { Logger.Log("login from user'{0}'", model.Email);
             if (!ModelState.IsValid)
             {
-                
                 return View(model);
             }
 

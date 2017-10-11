@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace MVCSignalRtest2.Log
@@ -10,11 +11,11 @@ namespace MVCSignalRtest2.Log
     public class Logger
     {
         private static object mutex = new object();
-        private static DateTime _lastFachina;
+        private static DateTime _lastFachina = DateTime.MinValue;
 
         private static string GetPath()
         {
-            string path = ConfigurationManager.AppSettings["logDir"] ?? "C:\\Temp";
+            string path = ConfigurationManager.AppSettings["log_logDir"] ?? "C:\\Temp";
          
             if (!path.EndsWith("\\")) path += "\\";
             return path;
@@ -22,27 +23,14 @@ namespace MVCSignalRtest2.Log
 
         public static void Log(string msg)
         {
-            Console.WriteLine(msg);
-
             lock (mutex)
             {
                 var dt = DateTime.Now;
 
-                if (_lastFachina == null || _lastFachina < dt.AddMonths(-1))
-                {
-                    Fachina();
-                    _lastFachina = dt;
-                }
-                System.IO.StreamWriter sw = System.IO.File.AppendText(
-                        string.Format("{0}log_{1}-{2:00}.txt", GetPath(), dt.Year, dt.Month));
-                try
-                {
-                    sw.WriteLine(string.Format("{0:G}: {1}.", dt, msg));
-                }
-                finally
-                {
-                    sw.Close();
-                }
+                var file = new FileInfo(string.Format("{0}log_{1}-{2:00}.txt", GetPath(), dt.Year, dt.Month));
+                file.Directory.Create();
+
+                File.AppendAllText(file.FullName, Environment.NewLine + msg);
             }
         }
 
@@ -53,21 +41,34 @@ namespace MVCSignalRtest2.Log
         }
 
 
-        public static void Exception(Exception ex)
+        public static void Log(Exception ex)
         {
-            Log(string.Format("EXCEPTION: {0}\n{1}", ex.Message, ex.StackTrace.ToString()));
+            Log(string.Format("EXCEPTION: {0}", ex.ToString()));
         }
 
         private static void Fachina()
         {
+            var now = DateTime.Now;
+
+            if (_lastFachina > now.AddMonths(-1))
+            {
+                return;
+            }
+
+            var str = ConfigurationManager.AppSettings["log_months-to-keep-logs"];
+            int months = int.TryParse(str, out months) ? months : 6;
+
+
             foreach (string file in Directory.GetFiles(GetPath()))
             {
                 FileInfo fi = new FileInfo(file);
-                if (fi.Name.StartsWith("log_") && fi.Extension.Equals(".txt") && fi.CreationTime < DateTime.Now.AddMonths(-6))
+                if (fi.Name.StartsWith("log_") && fi.Extension.Equals(".txt") && fi.CreationTime < now.AddMonths(-months))
                 {
                     fi.Delete();
                 }
             }
+
+            _lastFachina = now;
         }
 
         #region Overload methods
