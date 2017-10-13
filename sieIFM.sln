@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCSignalRtest2", "MVCSignalRtest2\MVCSignalRtest2.csproj", "{5A44700E-6F4C-4F33-9B89-DCDCB27B7F95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sieIFM", "sieIFM\sieIFM.csproj", "{5A44700E-6F4C-4F33-9B89-DCDCB27B7F95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04B2EE4C-9523-432F-8D6F-535BF85F6985}"
 	ProjectSection(SolutionItems) = preProject
