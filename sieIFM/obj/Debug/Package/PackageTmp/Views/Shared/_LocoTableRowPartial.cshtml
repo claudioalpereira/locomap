@@ -1,0 +1,50 @@
+﻿@model MVCSignalRtest2.Models.LocoStatus
+
+
+
+
+<tr>
+    <th scope="row">@Model.Loco</th>
+    <td>
+        @*  <span class="locoprop-name no-export">Km</span> *@
+        <span class="locoprop-value">@Model.Mileage</span>
+        <span class="locoprop-unit no-export">Km</span>
+    </td>
+    @*
+        <td>
+            <span class="locoprop-name"></span>
+            <span class="locoprop-value">@Model.Hours</span>
+            <span class="locoprop-unit">h</span>
+        </td>
+    *@
+    <td>
+        @*  <span class="locoprop-name no-export">EAR</span> *@
+        <span class="locoprop-value">@Model.EnergActCons</span>
+        <span class="locoprop-unit no-export"> kWh</span>
+    </td>
+    <td>
+        @*  <span class="locoprop-name no-export">ERR </span> *@
+        <span class="locoprop-value">@Model.EnergReactCons</span>
+        <span class="locoprop-unit no-export"> kVArh</span>
+    </td>
+    <td>
+        @*  <span class="locoprop-name no-export">EAD </span> *@
+        <span class="locoprop-value">@Model.EnergActDev</span>
+        <span class="locoprop-unit no-export"> kWh</span>
+    </td>
+    <td>
+        @*  <span class="locoprop-name no-export">ERD </span> *@
+        <span class="locoprop-value">@Model.EnergReactDev</span>
+        <span class="locoprop-uni no-export"> kVArh</span>
+    </td>
+    <td>
+        @*  <span class="locoprop-name no-export">Up </span> *@
+        <span class="locoprop-value">@Model.Uptime</span>
+        <span class="locoprop-unit no-export"> min</span>
+    </td>
+    <td>
+        @*  <span class="locoprop-name no-export">Act. </span> *@
+        <span class="locoprop-value">@Model.LastUpdate</span>
+        <span class="locoprop-unit no-export"></span>
+    </td>
+</tr>

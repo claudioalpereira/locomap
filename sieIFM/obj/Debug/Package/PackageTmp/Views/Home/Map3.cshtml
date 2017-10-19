@@ -1,0 +1,212 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+ 
+    @Scripts.Render("~/bundles/jquery")
+    <link href='\Content\mapbox\mymap.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+          crossorigin="" />
+
+</head>
+<body>
+    <div id='map'></div>
+    <div id='sidebar' class='fill-navy-dark dark'>
+        <!--
+            <div class='clearfix'>
+            <div id="siemensLogo" class="col6">
+                <img src="~/Content/img/siemens_anomated.gif" style="width:100%"/>
+            </div>
+            <div class='col6'>
+                <div class='metriclabel small quiet space-top4 space-bottom4'>Total<br>Locomotives</div>
+                <div class='metric retrieved denim'>0</div>
+            </div>
+                
+        </div>
+        <div class='metriclabel small quiet space-bottom4' style='padding-top:40px'>Last Updated</div>
+        <div class='metric responsetime space-bottom4'>-</div>
+        <div class='metriclabel small quiet space-top4 space-bottom2'>Events</div>
+        -->
+        <div id="logo-container">
+            <img id="sie-logo" src="/Content/img/sie_ingenuity_logo.png" />
+        </div>
+
+        <!--     
+        <div id="siemens-logo"></div>
+        <div class="nts-comp nts-logo" data-ste-component="logo">
+            <a href="http://www.siemens.com/" class="logo">
+                <img src="http://www.siemens.com/content/dam/internet/siemens-com/global/logo/siemens-logo-en-2x.png" alt="logo image" class="cq-dd-image">
+            </a>
+            <a href="http://www.siemens.com/" class="logoClaim">
+                <img src="http://www.siemens.com/content/dam/internet/siemens-com/global/logo/siemens-logo-claim-en-2x.png" alt="logo image" class="cq-dd-image">
+            </a>
+        </div>
+-->
+        <div class='ticker dark small text-left'></div>
+    </div>
+
+
+    @*
+        +++++++++++++++++++++++++++++++++++++++++++++
+            page js
+        +++++++++++++++++++++++++++++++++++++++++++++
+    *@
+    <script>
+
+        var locos = [];
+
+        function updateSidebar() {
+            locos.forEach(function (loco) {
+                var elemID = '#ticker_' + loco.Loco;
+
+                if (!document.getElementById(elemID)) {
+                    updateTicker('<div id="' + elemID + '"></div>');
+                }
+                document.getElementById(elemID).innerHTML = '<strong class="incoming strongpad" style="background:lightblue">' + loco.Loco + '</strong> ' + loco.Mileage + ' <strong>Km</strong> ' + loco.EnergActCons + '<strong>Kw/h</strong> ' + loco.EnergReactCons + '<strong>KVA/h</strong> ' + loco.EnergActDev + '<strong>Kw/h</strong> ' + loco.EnergReactDev + ' <strong>KVA/h</strong>';
+            });
+        }
+        
+
+        function updateTicker(content) {
+
+            $('.ticker')
+              .prepend(content)
+
+            window.setTimeout(function () {
+                $('.ticker div').addClass('expanded')
+            }, 50);
+        };
+
+    </script>
+
+    @*
+        +++++++++++++++++++++++++++++++++++++++++++++
+            Leaflet
+        +++++++++++++++++++++++++++++++++++++++++++++
+    *@
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+            integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+            crossorigin=""></script>
+
+    <script>
+
+        @* INIT *@
+
+
+
+        var mymap = L.map('map');//.setView([9.405, -8.7], 9);
+        var locoIcon = L.icon({
+            iconUrl: 'Content/mapbox/train.gif',
+            iconSize: [11, 13], // size of the icon
+            iconAnchor: [5, 6], // point of the icon which will correspond to marker's location
+            popupAnchor: [0, -6] // point from which the popup should open relative to the iconAnchor
+        });
+        var markers = [];
+        var token = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.light',
+            accessToken: token
+        }).addTo(mymap);
+
+
+
+        function updateMarker(loco, marker) {
+
+            marker.setLatLng({ lat: loco.Latitude, lng: loco.Longitude });
+            marker.setIcon(locoIcon);
+            marker.bindPopup(loco.Loco);
+            marker.Loco = loco.Loco;
+
+            return marker;
+        }
+
+        function updateMarkers() {
+
+            // apagar markers
+            markers.forEach(function(m){
+                if($.inArray(m.Loco, locos.map(function(l){return l.Loco;})) == -1){
+                    markers.pop(m);
+                    m.removeFrom(mymap);
+                }
+            });
+
+            locos.forEach(function(l){
+                var m = markers.find(function(e){return e.Loco == l.Loco;});
+                if(!m){
+                    m = updateMarker(l, new L.marker());
+                    markers.push(m);
+                    m.addTo(mymap);
+                } else{
+                    m.setLatLng({lat: l.Latitude, lng:l.Longitude});
+                }
+            });
+
+            var group = new L.featureGroup(markers);
+            mymap.fitBounds(group.getBounds(), { padding: [50,50] });
+        }
+    </script>
+
+
+
+        @*
+        +++++++++++++++++++++++++++++++++++++++++++++
+            SignalR
+        +++++++++++++++++++++++++++++++++++++++++++++
+        *@
+    <script src="/Scripts/jquery.signalR-2.2.2.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="/signalr/hubs"></script>
+
+    <script type="text/javascript">
+
+    $(function () {
+        // Declare a proxy to reference the hub.
+        var notifications = $.connection.messagesHub;
+
+        //debugger;
+        // Create a function that the hub can call to broadcast messages.
+        notifications.client.updateMessages = function () {
+            getAllMessages()
+        };
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+            console.log("connection started");
+            getAllMessages();
+        }).fail(function (e) {
+            alert(e);
+        });
+    });
+
+    function getAllMessages()
+    {
+        //var tbl = $('#messagesTable');
+        $.ajax({
+            url: 'home/GetMessages',
+            contentType: 'application/html ; charset:utf-8',
+            type: 'GET',
+            dataType: 'html'
+        }).success(function (result) {
+
+            locos = JSON.parse(result);
+            updateMarkers();
+            updateSidebar();
+
+        }).error(function () {
+            alert('ERROR retrieving data from the server');
+        });
+    }
+
+    </script>
+
+    </body>
+</html>

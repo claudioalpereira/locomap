@@ -15,7 +15,7 @@ namespace MVCSignalRtest2.Log
 
         private static string GetPath()
         {
-            string path = ConfigurationManager.AppSettings["log_logDir"] ?? "C:\\Temp";
+            string path = "D:\\CL\\";//ConfigurationManager.AppSettings["log_logDir"] ?? "C:\\Temp";
          
             if (!path.EndsWith("\\")) path += "\\";
             return path;
@@ -25,13 +25,20 @@ namespace MVCSignalRtest2.Log
         {
             lock (mutex)
             {
-                var dt = DateTime.Now;
+                try
+                {
+                    var dt = DateTime.Now;
 
-                var file = new FileInfo(string.Format("{0}log_{1}-{2:00}.txt", GetPath(), dt.Year, dt.Month));
-                file.Directory.Create();
+                    var file = new FileInfo(string.Format("{0}log_{1}-{2:00}.txt", GetPath(), dt.Year, dt.Month));
+                    file.Directory.Create();
 
-                File.AppendAllText(file.FullName, Environment.NewLine + msg);
-            }
+                    File.AppendAllText(file.FullName, Environment.NewLine + msg);
+
+                }
+                catch (Exception)
+                {
+                    // DebaixoDoTapetator Pattern
+                }            }
         }
 
 
