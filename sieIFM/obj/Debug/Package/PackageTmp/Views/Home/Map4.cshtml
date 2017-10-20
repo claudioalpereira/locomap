@@ -141,8 +141,10 @@
 
     @* INIT *@
 
-    var mymap = L.map('map').setView([39.67696, -8.1447127], 7);
+    var mymap = L.map('map', {tap:false});
+    mymap.setView([39.67696, -8.1447127], 7);
     mymap.dragging.disable();
+    
 
     var locoIcon = L.icon({
         iconUrl: '@Url.Content("~/Content/img/train.gif")', //'Content/img/train.gif',

@@ -99,6 +99,44 @@ https://gist.github.com/jordyvanraaij/9069194
     }
 }
 
-.locoprop-unit{
-    margin-left:2em;
+
+
+.thead-default th, th{
+    background-color: #167F92;
+    color: white;
 }
+
+.locoprop-name{
+    display:none;
+    text-align:center;
+    width: 8em;
+    padding-right:1em;
+}
+.locoprop-value{
+}
+.locoprop-unit{
+    min-width:5em;
+    padding-left:1em;
+    font-weight:bold;
+    text-align:left;
+}
+
+@media (max-width: 480px) {
+    .locoprop-name{
+        display:flex;
+    }
+    .locoprop-value{
+    }
+    .locoprop-unit{
+    }
+    thead {
+        display:none;
+    }
+    tr td:last-child{
+        font-size:75%;
+        color:lightgray;
+        
+    }
+}
+
+
