@@ -8,6 +8,7 @@ using System.Web.Mvc;
 namespace MVCSignalRtest2.Controllers
 {
     [Authorize]
+    [AuthorizeConcurrentUser(false)]
     [RequireHttps]
     public class HomeController : Controller
     {

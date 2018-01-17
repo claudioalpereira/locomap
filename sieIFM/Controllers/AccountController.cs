@@ -69,8 +69,9 @@ namespace MVCSignalRtest2.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            Logger.Log("login from user'{0}'", model.Email);
 
-        { Logger.Log("login from user'{0}'", model.Email);
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -82,6 +83,8 @@ namespace MVCSignalRtest2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    // register user to allow only one concurrent user login
+                    SessionManager.RegisterLogin(new SessionManager.User { UserName = model.Email, SessionId = HttpContext.Session.SessionID });
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

@@ -47,5 +47,10 @@ namespace MVCSignalRtest2
             //Stop SQL dependency
             SqlDependency.Stop(connString);
         }
+
+        void Session_Start(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session.Add("ifmAppSession", string.Empty);
+        }
     }
 }

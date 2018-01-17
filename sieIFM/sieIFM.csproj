@@ -199,6 +199,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageRepository.cs" />
     <Compile Include="Models\Messages.cs" />
+    <Compile Include="Models\SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
