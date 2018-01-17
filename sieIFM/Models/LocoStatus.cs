@@ -14,6 +14,7 @@ namespace MVCSignalRtest2.Models
         public double Latitude { get; set; }
         public double Altitude { get; set; }
         public double Mileage { get; set; }
+        public double Hours { get; set; }
         public double EnergReactCons { get; set; }
         public double EnergReactDev { get; set; }
         public double EnergActCons { get; set; }

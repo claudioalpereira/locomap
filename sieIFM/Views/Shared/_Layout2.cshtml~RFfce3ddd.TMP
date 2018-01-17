@@ -18,10 +18,7 @@
             min-height:100%;
             height:100%;
         }
-
     </style>
-
-  
 
 </head>
 <body>
@@ -30,28 +27,34 @@
         <a class="navbar-brand" href="http://siemens.pt">
             <img src="~/Content/img/sie_ingenuity_logo.png" height="50" alt="">
         </a>
-
+        <h3 id="app-short-name" style="font-weight:100">IFM</h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div id="app-name" class="col-auto mr-auto"><h3 style="font-weight:100">Intelligent Fleet Monitor</h3></div>
+            <div id="app-name" class="col-auto mr-auto">
+                <h3 style="font-weight:100">Intelligent Fleet Monitor</h3>
+            </div>
 
-   <ul class="navbar-nav col-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/Home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/About">About</a>
-                </li>
-                <li class="nav-item">
-                    <a id="btnExport" class="nav-link" href="#">Export</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="Contact">Contact</a>
-                </li>
-            </ul>
+        <ul class="navbar-nav col-auto">
+            @* 
+            <li class="nav-item active">
+                <a class="nav-link" href="~">Home <span class="sr-only">(current)</span></a>
+            </li>
+            *@           
+            <li class="nav-item">
+                <a class="nav-link" href="~/Home/About">About</a>
+            </li>
+            @*
+            <li class="nav-item">
+                <a id="btnExport" class="nav-link" href="#">Export</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="~/home/contact">Contact</a>
+            </li>
+        *@
+        </ul>
 
             @*
                 <form class="form-inline my-2 my-lg-0">
@@ -72,6 +75,11 @@
 
     @RenderSection("scripts", false)    
     
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Restricted Information</span>
+        </div>
+    </footer>
 
 </body>
 </html>

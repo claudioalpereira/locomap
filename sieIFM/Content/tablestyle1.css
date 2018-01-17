@@ -135,8 +135,11 @@ https://gist.github.com/jordyvanraaij/9069194
     tr td:last-child{
         font-size:75%;
         color:lightgray;
-        
     }
+    .my-collapsed{
+        display: none;
+    }
+
 }
 
 

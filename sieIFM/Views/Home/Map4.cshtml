@@ -40,7 +40,9 @@
     .locoprop-name{
         display:none;
     }
-
+    #app-short-name{
+            display:none;
+    }
       
             
     @@media (max-width: 480px) {
@@ -60,6 +62,9 @@
         }
         td{
             margin:4px;
+        }
+        #app-short-name{
+            display:block;
         }
     }
 
@@ -82,6 +87,12 @@
         position: absolute;
     }
     */
+
+    .oneShadeOfGrey{
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+}
 </style>
 
 
@@ -126,6 +137,58 @@
 
     @* makes the ajax call the first time just in case signalr failes to retrieve data *@
     $(document).ready(updateTable);
+   
+    var zoom;
+    function table_loco_click(elem, loc) {
+
+        if (zoom == loc) {
+
+            $('.oneShadeOfGrey').removeClass('oneShadeOfGrey');
+            resetFit();
+            zoom = null;
+
+        } else {
+
+            $('td').removeClass('oneShadeOfGrey'); // if any
+            $("tr[data-loco='"+loc+"'] td").addClass('oneShadeOfGrey');
+            
+            var marker = markers.find(l=>l.Loco == loc);
+            fit(marker);
+            zoom = loc;
+        }
+    }
+    function myCollapse(elem, loc) {
+
+        $("tr[data-loco='" + loc + "'] td").toggleClass('my-collapsed');
+    }
+
+    function table_loco_click_OLD(elem, loc) {
+
+        if (zoom == elem) {
+
+            $(elem).children('td').removeClass('oneShadeOfGrey');
+            resetFit();
+            zoom = null;
+
+        } else {
+
+            $(zoom).children('td').removeClass('oneShadeOfGrey'); // if any
+            $(elem).children('td').addClass('oneShadeOfGrey');
+
+            var marker = markers.find(l=>l.Loco == loc);
+            fit(marker);
+            zoom = elem;
+        }
+    }
+
+    $("tr th").click(function (e) {
+
+        e.cancelBubble();
+
+        e.stopPropagation(); // I think.. for IE
+
+    });
+
 
 </script>
 
@@ -144,14 +207,30 @@
     var mymap = L.map('map', {tap:false});
     mymap.setView([39.67696, -8.1447127], 7);
     mymap.dragging.disable();
-    
 
+@*
     var locoIcon = L.icon({
         iconUrl: '@Url.Content("~/Content/img/train.gif")', //'Content/img/train.gif',
         iconSize: [11, 13], // size of the icon
         iconAnchor: [5, 6], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -6] // point from which the popup should open relative to the iconAnchor
     });
+*@
+@*
+    var locoIcon = L.icon({
+        iconUrl: '@Url.Content("~/Content/img/LE4701_side.png")', //'Content/img/train.gif',
+        iconSize: [80, 19], // size of the icon
+        iconAnchor: [40, 8], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -8] // point from which the popup should open relative to the iconAnchor
+    });
+*@
+    var locoIcon = L.icon({
+            iconUrl: '@Url.Content("~/Content/img/red-dot.png")',
+            iconSize: [32, 32], // size of the icon
+            iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
+            popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
+        });
+
     var markers = [];
     var token = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
 
@@ -192,7 +271,7 @@
         });
 
         locos.forEach(function (l) {
-           
+
             //var m = markers.find(function (e) { return e.Loco == l.Loco; }); // not supported on IE
             var m = $.grep(markers, function (e) { return e.Loco == l.Loco; })[0];
             if (!m) {
@@ -204,9 +283,72 @@
             }
         });
 
+        resetFit();
+@*
         var group = new L.featureGroup(markers);
         mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
+        mymap.fitBounds(new L.featureGroup(markers).getBounds(), { padding: [0, 0] });
+
+        if (locos.length < 2) {
+            mymap.setZoom(11);
+        }
+*@
     }
+
+    function fitMap(mrkrs) {
+
+        // fitMap() overload uses global var
+        mrkrs = mrkrs || markers;
+
+        // if a single marker is passed, we transform it into an array
+        if (mrkrs.Loco) {
+            mrkrs = [mrkrs];
+        }
+
+        if(mrkrs.length == 0){
+            mymap.setZoom(11);
+        }
+        else if (mrkrs.length == 1) {
+            var marker = mrkrs[0];
+            marker.openPopup();
+            var bounds = L.latLngBounds([marker.getLatLng()]);
+            mymap.fitBounds(bounds);
+            mymap.setZoom(15);
+        }
+        else {
+            var bounds = new L.featureGroup(markers).getBounds();
+            mymap.fitBounds(bounds, { padding: [8, 8] });
+        }
+    }
+
+
+    function fit(marker) {
+
+        @* http://usabilityetc.com/2016/07/how-to-center-a-leaflet-map-on-a-marker/ *@
+
+        var latLngs = [marker.getLatLng()];
+        var markerBounds = L.latLngBounds(latLngs);
+        mymap.fitBounds(markerBounds);
+        mymap.setZoom(15);
+        marker.openPopup();
+
+    }
+
+    function resetFit() {
+
+        // close all popups
+        markers.forEach(m => m.closePopup());
+
+        var group = new L.featureGroup(markers);
+        mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
+
+        if (locos.length < 2) {
+            mymap.setZoom(11);
+        }
+    }
+
+
+
 
 </script>
 
@@ -229,12 +371,12 @@ $(function () {
     //debugger;
     // Create a function that the hub can call to broadcast messages.
     notifications.client.updateMessages = function () {
-        getAllMessages()
+        getAllMessages();
     };
     // Start the connection.
     $.connection.hub.start().done(function () {
         console.log("signalr: connection started");
-        getAllMessages();
+      //  getAllMessages();
     }).fail(function (e) {
         console.log("signalr: "+e);
     });
@@ -251,13 +393,17 @@ function getAllMessages()
     }).success(function (result) {
 
         locos = JSON.parse(result);
+        //console.log(locos);
         updateMarkers();
         updateTable();
 
-    }).error(function () {
+    }).error(function (err) {
         console.log('signalr: ERROR retrieving data from the server');
+        console.log(err);
     });
 }
+
+getAllMessages();
 
 </script>
 
@@ -269,7 +415,7 @@ function getAllMessages()
 
 <script>
     @* https://codepen.io/kostas-krevatas/pen/mJyBwp *@
-
+@*
     var elems;
     // My
     Node.prototype.filterByClass = function(classname){
@@ -285,10 +431,10 @@ function getAllMessages()
 
             //getting data from our table
             var data_type = 'data:application/vnd.ms-excel';
-           
+
             var table_div = $('#table_wrapper').clone();
             table_div.find('.no-export').remove();
-            var table_html2 = xxx.html().replace(/ /g, '%20');
+            var table_html2 = table_div.html().replace(/ /g, '%20');
 
 
             var d = new Date();
@@ -298,6 +444,7 @@ function getAllMessages()
             a.click();
         });
     });
+*@
 </script>
 }
 

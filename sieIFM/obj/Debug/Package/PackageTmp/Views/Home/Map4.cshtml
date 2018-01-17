@@ -206,6 +206,10 @@
 
         var group = new L.featureGroup(markers);
         mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
+
+        if (locos.length < 2) {
+            mymap.setZoom(11);
+        }
     }
 
 </script>
@@ -288,7 +292,7 @@ function getAllMessages()
            
             var table_div = $('#table_wrapper').clone();
             table_div.find('.no-export').remove();
-            var table_html2 = xxx.html().replace(/ /g, '%20');
+            var table_html2 = table_div.html().replace(/ /g, '%20');
 
 
             var d = new Date();

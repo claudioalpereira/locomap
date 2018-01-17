@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace MVCSignalRtest2.Controllers
 {
     [Authorize]
-    //[RequireHttps]
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index(string view)
@@ -25,8 +25,6 @@ namespace MVCSignalRtest2.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

@@ -14,6 +14,7 @@ using MVCSignalRtest2.Log;
 namespace MVCSignalRtest2.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -139,7 +140,8 @@ namespace MVCSignalRtest2.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        //      [AllowAnonymous]
+        [Authorize(Users = "claudio.pereira@siemens.com")]
         public ActionResult Register()
         {
             return View();
@@ -148,7 +150,8 @@ namespace MVCSignalRtest2.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        //    [AllowAnonymous]
+        [Authorize(Users = "claudio.pereira@siemens.com")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
