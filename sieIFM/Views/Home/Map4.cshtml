@@ -152,7 +152,7 @@
             $('td').removeClass('oneShadeOfGrey'); // if any
             $("tr[data-loco='"+loc+"'] td").addClass('oneShadeOfGrey');
             
-            var marker = markers.find(l=>l.Loco == loc);
+            var marker = markers.find(function (l) { l.Loco == loc; });
             fit(marker);
             zoom = loc;
         }
@@ -175,7 +175,7 @@
             $(zoom).children('td').removeClass('oneShadeOfGrey'); // if any
             $(elem).children('td').addClass('oneShadeOfGrey');
 
-            var marker = markers.find(l=>l.Loco == loc);
+            var marker = markers.find(function (l) { l.Loco == loc; });
             fit(marker);
             zoom = elem;
         }
@@ -337,7 +337,7 @@
     function resetFit() {
 
         // close all popups
-        markers.forEach(m => m.closePopup());
+        markers.forEach(function (m) { m.closePopup(); });
 
         var group = new L.featureGroup(markers);
         mymap.fitBounds(group.getBounds(), { padding: [0, 0] });

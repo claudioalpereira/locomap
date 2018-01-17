@@ -5,6 +5,8 @@ using System.Web;
 
 namespace MVCSignalRtest2.Models
 {
+    // https://stackoverflow.com/a/42493910
+    // https://stackoverflow.com/a/5835631
     public static class SessionManager
     {
         private static List<User> _sessions = new List<User>();
