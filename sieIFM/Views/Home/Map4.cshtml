@@ -152,7 +152,9 @@
             $('td').removeClass('oneShadeOfGrey'); // if any
             $("tr[data-loco='"+loc+"'] td").addClass('oneShadeOfGrey');
             
-            var marker = markers.find(function (l) { l.Loco == loc; });
+            //var marker = markers.find(function (l) { l.Loco == loc; }); // not supported on IE
+            var marker = $.grep(markers, function (l) { return l.Loco == loc; })[0];
+
             fit(marker);
             zoom = loc;
         }
