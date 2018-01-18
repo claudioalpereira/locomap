@@ -1,13 +1,187 @@
 ﻿@{
     ViewBag.Title = "About";
     Layout = "../Shared/_Layout2.cshtml";
-
 }
-    
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-3">About</h1>
         <p class="lead">Intelligent Fleet Monitor <span class="badge badge-pill badge-info">version 2.0</span></p>
-        <p class="lead">Webpage that displays the location of all connected locomotives, along with some status data relevant to the operator.</p>
+        @*<p class="lead">Webpage that displays the location of all connected locomotives, along with some status data relevant to the operator.</p>*@
+
+        <br />
+        <h1 class="display-4">End User License Agreement</h1>
+        @*
+    <h4 class="display-4">1. Scope</h4>
+    <p class="lead">
+        1.1.	The use of this web application, provided by Siemens SA and/or its affiliates ("Siemens"), is subject to these Terms of Use in their current version. By logging in the user accepts these Terms of Use in their current version.
+    </p>
+
+    <h4 class="display-4">2. Registration, Password</h4>
+    <p class="lead">
+        2.1.	Only registered users may access the web application.
+    </p>
+    <p class="lead">
+        2.2.	When registering, the user shall provide accurate information and communicate subsequent amendments promptly (where possible, online). E-mail addresses and other contact information may be used by Siemens in connection with the use of the web application for the purpose of making contact. The user will ensure that he/she receives emails that are sent to the e-mail address that the user provided.
+    </p>
+        *@
+
+
+        <ol id="eula_list">
+            <li class="table_title">
+                <h4>Scope</h4>
+                <ol>
+                    <li>The use of this web application, provided by Siemens SA and/or its affiliates ("Siemens"), is subject to these Terms of Use in their current version. By logging in the user accepts these Terms of Use in their current version.</li>
+                </ol>
+            </li>
+
+            <li class="table_title">
+                <h4>Registration, Password</h4>
+                <ol>
+                    <li>Only registered users may access the web application.</li>
+                    <li>When registering, the user shall provide accurate information and communicate subsequent amendments promptly (where possible, online). E-mail addresses and other contact information may be used by Siemens in connection with the use of the web application for the purpose of making contact. The user will ensure that he/she receives emails that are sent to the e-mail address that the user provided.</li>
+                    <li>The access credentials are personal. The user is required to carefully store his/her access credentials and protect them from unauthorized access. If the user becomes aware that a third party has used his/her access credentials, the user is required to notify Siemens immediately.</li>
+                    <li>The user must properly log out of the web application after each use.</li>
+                    <li>
+                        Siemens reserves the right, upon an indication that these Terms of Use have been breached, or for other objectively serious reasons, to temporarily or permanently block the user's registration and/or his/her access to the Web application and/or the customer entirely. Siemens is particularly entitled to do so, if the user:
+                        <ul>
+                            <li>provides false registration information,</li>
+                            <li>violates these Terms of Use or his/her duty of care in handling the access credentials or</li>
+                            <li>violates applicable law when accessing or using the web application.</li>
+                        </ul>
+                    </li>
+                    <li>The user may demand that his registration be cancelled at any time, provided that the cancellation does not conflict with on-going contractual relationships. In this case, Siemens will delete all user data and all other personal data of the user as soon as they are no longer required for the implementation of the contractual relationship.</li>
+
+                </ol>
+            </li>
+
+            <li class="table_title">
+                <h4>Limited Use Rights</h4>
+                <ol>
+                    <li>The web application is provided to Siemens' customers on the basis of a contract. The user is entitled to use the web application and the information made available via the web application for business purposes of the customer on whose behalf the user is accessing the web application. Any other use or disclosure is prohibited.</li>
+                    <li>The user shall not decompile, reverse engineer or otherwise modify the web application unless expressly permitted by law.</li>
+                    <li>To the extent that the web application includes open source components, the license terms of the applicable open source software take priority over these Terms of Use. The user is provided with applicable open source terms in an appropriate manner.</li>
+                    <li>Except as expressly permitted in these Terms of Use, information, brand names and other contents of the web application may not be altered, copied, reproduced, sold, rented, used, supplemented or otherwise exploited without the prior written permission of Siemens. The user acknowledges that the layout of the web application, the textual-graphical design and the "look and feel" of the user interface and the graphics and texts are protected by copyright. The user has only the rights expressly granted herein and has no other rights of any kind, especially to the company name and industrial property rights such as patents, utility models or brands. Users agree not to copy the web application except where such copying is incidental to normal use of the web application, or where it is necessary for the purpose of back-up or operational security.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>User Obligations</h4>
+                <ol>
+                    <li>
+                        In using the web application, the user shall not:
+                        <ul>
+                            <li>act in a manner contrary to public decency;</li>
+                            <li>spread content which is defamatory, libelous or commercially detrimental, illegal, harmful to minors, politically radical or offensive;</li>
+                            <li>violate intellectual property rights or other proprietary rights;</li>
+                            <li>transmit any content containing viruses, Trojan horses or other programs that may damage software;</li>
+                            <li>use the web application in a way that could damage, disable, overburden, impair or compromise Siemens' systems or security or interfere with other users;</li>
+                        </ul>
+                    </li>
+                    <li>Before accessing the web application, during use and when transferring data, the user shall take all reasonable precautions against attacks on his/her system and to prevent, for example, viruses, worms or Trojan horses.</li>
+                    <li>The user shall promptly inform Siemens if the user notices any errors in the functionality of the web application or the information provided therein. This also applies if the user erroneously has access to data that is obviously not intended to be accessed by the user.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>Confidentiality</h4>
+                <ol>
+                    <li>The user will have access to Siemens' confidential information through the web application. In this context, confidential information includes information, documents, details and data that are marked as confidential or are by their nature to be regarded as confidential. In particular, Siemens' confidential information includes the methodology of data collection and data analysis, all reports and other know-how related to the project.</li>
+                    <li>
+                        Confidential information may be used only in accordance with these Terms of Use and as required for and authorized under the Customer Contract. In particular, the user must:
+                        <ul>
+                            <li>refrain from any action that is suitable to draw conclusions about the know-how employed by Siemens; and</li>
+                            <li>refrain from using Siemens' trade secrets and confidential information with the aim to create a competing offer with Siemens.</li>
+                        </ul>
+                    </li>
+                    <li>Confidential information may not be disclosed to third parties.</li>
+                    <li>The user is required to immediately inform Siemens as soon as the user becomes aware of an imminent breach of Siemens' confidentiality interests or that such a breach has taken place or upon existence of such a suspicion.</li>
+                    <li>Upon termination of the authorization to use, at the discretion of Siemens, the user is obliged to either return or destroy or delete all confidential information and to prove the destruction or deletion in an appropriate manner. At Siemens' request, the user must confirm under penalty of perjury that the user has made all possible efforts to the best of his/her knowledge and belief to fulfill the above duties. Statutory retention obligations remain unaffected.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>User Content and Hyperlinks</h4>
+                <ol>
+                    <li>The web application may contain hyperlinks to third party websites. Siemens is not responsible for the content of such web pages and does not endorse such web pages or their contents. At the time the links were made, no illegal content was recognizable on the linked sites. Siemens has no control over the present and future form of the linked content and information.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>Liability</h4>
+                <ol>
+                    <li>Subject to section 7.2, Siemens' liability in respect of the web application is based solely on the Customer Contract and Siemens assumes no liability towards the user including, without limitation, for defects in the web application and the information contained therein, particularly for their accuracy, correctness, freedom of property rights and copyright of third parties, completeness and/or usability.</li>
+                    <li>
+                        Nothing in these Terms of Use shall limit or exclude Siemens' liability to the user for:
+                        <ul>
+                            <li>Intent or fraudulent misrepresentation;</li>
+                            <li>death or personal injury resulting from Siemens' negligence; or</li>
+                            <li>any other liability that cannot be excluded or limited by applicable law.</li>
+                        </ul>
+                    </li>
+                    <li>Although Siemens makes every effort to keep the web application free of viruses and protect it against attacks, Siemens does not guarantee freedom from viruses and assumes no liability for damages resulting from attacks on the web application. Prior to downloading any information, software and documentation, the user will ensure the presence of appropriate security measures and virus scanners for his/her own protection and to prevent viruses on the web application.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>Compliance with Export Control Provisions</h4>
+                <ol>
+                    <li>The user must comply with all applicable national and international (re-) export control law when transferring Siemens-provided data, information, software or documentation to third parties. In any event of such transfer, the user must comply with the (re-) export control regulations of the European Union.</li>
+                    <li>Prior to such a transfer, the user will particularly verify and take adequate measures to ensure that:
+                        <ul>
+                            <li>an embargo imposed by the European Union and/or the United Nations is not violated by such a transfer to third parties or by providing other economic resources related to information, software, and documentation provided by Siemens - also taking into account any restrictions on domestic transactions and any circumvention prohibitions;</li>
+                            <li>the regulations of all applicable Sanctioned Party Lists of the European Union are complied with regarding the trading with entities, individuals or organizations mentioned therein</li>
+                        </ul>
+                    </li>
+                    <li>If required to enable public authorities or Siemens to conduct export control checks, the user, upon request by Siemens, will provide immediately to Siemens complete information about the final recipient, the final destination and the intended use of the information, software and documentation provided by Siemens, as well as any export control restrictions.</li>
+                    <li>The user shall indemnify and hold harmless Siemens from and against any claim, proceeding, action, fine, loss, cost and damages arising out of or relating to any noncompliance with export control regulations by the user, and the user shall reimburse Siemens for all losses and expenses resulting thereof, unless the user is not responsible for such noncompliance. These provisions do not imply a reversal of the burden of proof.</li>
+                    <li>The performance of the contract by Siemens is subject to the proviso that there are no obstacles based on national or international foreign trade and customs requirements or any embargos and/or other sanctions.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>Data Privacy Policy</h4>
+                <ol>
+                    <li>When collecting, using and processing personal data of users of the Web application, Siemens shall comply with applicable data protection regulations and the Siemens Privacy Policy, which may be accessed through hyperlinks on the web application.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>General</h4>
+                <ol>
+                    <li>In the event any provision of these Terms of Use is held to be invalid or unenforceable, the remaining provisions will remain in full force and effect.</li>
+                    <li>No person other than the user and Siemens and/or its affiliates shall be entitled to enforce any term of these Terms of Use.</li>
+                </ol>
+            </li>
+            <li class="table_title">
+                <h4>Compliance with Laws</h4>
+                <ol>
+                    <li>The individual pages of the web application are operated and administered by Siemens SA and/or its affiliates. The pages comply with the requirements of the country in which the responsible company has its business residence. Siemens makes no representation and accepts no responsibility that data, information, software and/or documentation available on the web application are appropriate or available for viewing or downloading at locations outside such country. If users from outside the relevant country access the web application, they are solely responsible for compliance with all applicable local laws. Access to information, software and/or documentation available on the web application from countries in which such content is unlawful, is prohibited.</li>
+                </ol>
+            </li>
+
+        </ol>
+
     </div>
 </div>
+
+<style>
+ol {
+  counter-reset: section;                /* Creates a new instance of the
+                                            section counter with each ol
+                                            element */
+  list-style-type: none;
+}
+
+ol > li:not(.table_title)::before {
+    counter-increment: section; /* Increments only this instance
+                                        of the section counter */
+    content: counters(section, ".") " ";   /* Combines the values of all instances
+                                            of the section counter, separated
+                                            by a period */
+}
+
+ol > li.table_title h4::before {
+    counter-increment: section;
+    content: counters(section, ".") " ";
+}
+ol h4{
+    font-weight:100;
+    padding-top:1em;
+}
+
+
+</style>
