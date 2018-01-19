@@ -14,7 +14,7 @@ using MVCSignalRtest2.Log;
 namespace MVCSignalRtest2.Controllers
 {
     [Authorize]
-    [RequireHttps]
+    [MVCSignalRtest2.Utils.MyRequireHttps]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

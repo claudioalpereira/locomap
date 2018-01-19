@@ -9,7 +9,7 @@ namespace MVCSignalRtest2.Controllers
 {
     [Authorize]
     [AuthorizeConcurrentUser(false)]
-    [RequireHttps]
+    [MVCSignalRtest2.Utils.MyRequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index(string view)
