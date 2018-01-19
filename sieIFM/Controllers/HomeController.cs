@@ -14,7 +14,11 @@ namespace MVCSignalRtest2.Controllers
     {
         public ActionResult Index(string view)
         {
-           
+            int userTimeout = 30;
+            int.TryParse(System.Web.Configuration.WebConfigurationManager.AppSettings["user_timeout"], out userTimeout);
+
+            ViewBag.UserTimeout = userTimeout;
+
             return View(view??"Map4");
         }
 
