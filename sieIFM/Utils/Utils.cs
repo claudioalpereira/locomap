@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Web.Mvc;
 using RequireHttpsAttributeBase = System.Web.Mvc.RequireHttpsAttribute;
 
@@ -35,6 +38,20 @@ namespace MVCSignalRtest2.Utils
             }
 
             HandleNonHttpsRequest(filterContext);
+        }
+    }
+
+    public class Utils
+    {
+        public static async System.Threading.Tasks.Task<bool> CreateUserIfNotExists(Controllers.AccountController ctrl, string username, string password)
+        {
+            if(ctrl.SignInManager.UserManager.FindByEmail(username) == null)
+            {
+                var user = new Models.ApplicationUser { UserName = username, Email = password };
+                await ctrl.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                return true;
+            }
+            return false;
         }
     }
 }

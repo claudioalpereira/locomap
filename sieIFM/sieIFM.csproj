@@ -202,13 +202,17 @@
     <Compile Include="Models\SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utils\RequireHttpsAttribute.cs" />
+    <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap4.0.0.beta.min.css" />
+    <Content Include="Content\img\4701 - Copy - Copy.png" />
+    <Content Include="Content\img\4701 - Copy.png" />
     <Content Include="Content\img\4701.png" />
+    <Content Include="Content\img\LE4701_side.png" />
+    <Content Include="Content\img\red-dot.png" />
     <Content Include="Content\img\siemens_anomated.gif" />
     <Content Include="Content\img\sie_ingenuity_logo.png" />
     <Content Include="Content\img\train.gif" />

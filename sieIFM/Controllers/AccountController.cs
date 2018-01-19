@@ -87,6 +87,7 @@ namespace MVCSignalRtest2.Controllers
                     SessionManager.RegisterLogin(new SessionManager.User { UserName = model.Email, SessionId = HttpContext.Session.SessionID });
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
+                    Logger.Log("User '{0}' locked.", model.Email);
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
@@ -143,8 +144,8 @@ namespace MVCSignalRtest2.Controllers
 
         //
         // GET: /Account/Register
-        //      [AllowAnonymous]
-        [Authorize(Users = "claudio.pereira@siemens.com")]
+              [AllowAnonymous]
+        //[Authorize(Users = "claudio.pereira@siemens.com")]
         public ActionResult Register()
         {
             return View();
@@ -153,8 +154,8 @@ namespace MVCSignalRtest2.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        //    [AllowAnonymous]
-        [Authorize(Users = "claudio.pereira@siemens.com")]
+            [AllowAnonymous]
+        //[Authorize(Users = "claudio.pereira@siemens.com")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

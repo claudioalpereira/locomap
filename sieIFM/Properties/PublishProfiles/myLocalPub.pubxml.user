@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:33:59</publishTime>
     </File>
     <File Include="bin/MVCSignalRtest2.dll">
-      <publishTime>10/20/2017 18:58:17</publishTime>
+      <publishTime>01/19/2018 17:25:21</publishTime>
     </File>
     <File Include="bin/MVCSignalRtest2.pdb">
-      <publishTime>10/20/2017 18:58:17</publishTime>
+      <publishTime>01/19/2018 17:25:21</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>10/04/2017 11:33:18</publishTime>
@@ -162,8 +162,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap4.0.0.beta.min.css">
       <publishTime>10/11/2017 17:21:20</publishTime>
     </File>
+    <File Include="Content/img/4701 - Copy - Copy.png">
+      <publishTime>01/15/2018 12:21:37</publishTime>
+    </File>
+    <File Include="Content/img/4701 - Copy.png">
+      <publishTime>01/15/2018 12:10:38</publishTime>
+    </File>
     <File Include="Content/img/4701.png">
       <publishTime>08/11/2017 18:44:06</publishTime>
+    </File>
+    <File Include="Content/img/LE4701_side.png">
+      <publishTime>01/15/2018 12:22:11</publishTime>
+    </File>
+    <File Include="Content/img/red-dot.png">
+      <publishTime>01/15/2018 12:45:07</publishTime>
     </File>
     <File Include="Content/img/siemens_anomated.gif">
       <publishTime>10/03/2017 11:08:44</publishTime>
@@ -175,13 +187,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/29/2017 12:40:32</publishTime>
     </File>
     <File Include="Content/leaflet-1.2.0.css">
-      <publishTime>10/11/2017 17:15:57</publishTime>
+      <publishTime>01/15/2018 18:50:01</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>09/27/2017 11:33:52</publishTime>
     </File>
     <File Include="Content/tablestyle1.css">
-      <publishTime>10/19/2017 18:34:09</publishTime>
+      <publishTime>01/17/2018 13:09:21</publishTime>
     </File>
     <File Include="Content/tablestyle2.css">
       <publishTime>10/08/2017 13:36:35</publishTime>
@@ -310,10 +322,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:34:03</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>10/20/2017 17:08:44</publishTime>
+      <publishTime>01/18/2018 17:27:56</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>09/27/2017 11:33:52</publishTime>
+      <publishTime>10/20/2017 19:17:52</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>09/27/2017 11:33:52</publishTime>
@@ -328,7 +340,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2017 05:05:20</publishTime>
     </File>
     <File Include="Views/Home/Map4.cshtml">
-      <publishTime>10/20/2017 17:26:37</publishTime>
+      <publishTime>01/19/2018 13:00:10</publishTime>
     </File>
     <File Include="Views/Home/SignalR.cshtml">
       <publishTime>10/18/2017 18:37:32</publishTime>
@@ -364,16 +376,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/08/2017 05:27:19</publishTime>
     </File>
     <File Include="Views/Shared/_Layout2.cshtml">
-      <publishTime>10/20/2017 17:21:12</publishTime>
+      <publishTime>01/15/2018 11:30:45</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutSplash.cshtml">
       <publishTime>10/18/2017 18:43:48</publishTime>
     </File>
     <File Include="Views/Shared/_LocoTablePartial.cshtml">
-      <publishTime>10/19/2017 18:29:08</publishTime>
+      <publishTime>01/12/2018 18:18:05</publishTime>
     </File>
     <File Include="Views/Shared/_LocoTableRowPartial.cshtml">
-      <publishTime>10/19/2017 18:33:45</publishTime>
+      <publishTime>01/17/2018 12:59:50</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/20/2017 17:46:37</publishTime>
@@ -385,7 +397,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:33:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/20/2017 13:09:35</publishTime>
+      <publishTime>01/19/2018 17:25:22</publishTime>
     </File>
   </ItemGroup>
 </Project>
