@@ -10,42 +10,42 @@
 
 <tr data-loco=@Model.Loco style="cursor: pointer;">
     <th scope="row" onclick="@onclickTH">@Model.Loco</th>
-    <td onclick="@onclickTD">
+    <td onclick="@onclickTD" class="my-collapsed">
          <span class="locoprop-name no-export mr-auto text-left badge badge-info">Mileage</span>
         <span class="locoprop-value text-center">@Model.Mileage</span>
         @*<span class="locoprop-unit no-export"> Km</span>*@
     </td>
-    <td onclick="@onclickTD">
+    <td onclick="@onclickTD" class="my-collapsed">
         <span class="locoprop-name no-export mr-auto text-left badge badge-info">Op. Hours</span>
         <span class="locoprop-value">@Model.Hours</span>
         @*<span class="locoprop-unit">h</span>*@
     </td>
-    <td onclick="@onclickTD">
+    <td onclick="@onclickTD" class="my-collapsed">
         <span class="locoprop-name no-export mr-auto text-left badge badge-info">Act. Trac. En.</span>
         <span class="locoprop-value">@Model.EnergActCons</span>
         @*<span class="locoprop-unit no-export"> kWh</span>*@
     </td>
-    <td onclick="@onclickTD">
+    <td onclick="@onclickTD" class="my-collapsed">
         <span class="locoprop-name no-export mr-auto text-left badge badge-info">React. Trac. En.</span>
         <span class="locoprop-value">@Model.EnergReactCons</span>
         @*<span class="locoprop-unit no-export"> kvarh</span>*@
     </td>
-    <td onclick="@onclickTD">
+    <td onclick="@onclickTD" class="my-collapsed">
         <span class="locoprop-name no-export mr-auto text-left badge badge-info">Act. Bre. En.</span>
         <span class="locoprop-value">@Model.EnergActDev</span>
         @*<span class="locoprop-unit no-export"> kWh</span>*@
     </td>
-    <td onclick="@onclickTD">
+    <td onclick="@onclickTD" class="my-collapsed">
         <span class="locoprop-name no-export mr-auto text-left badge badge-info">React. Bre. En.</span>
         <span class="locoprop-value">@Model.EnergReactDev</span>
         @*<span class="locoprop-unit no-export"> kvarh</span>*@
     </td>
-    <td onclick="@onclickTD">
+    <td onclick="@onclickTD" class="my-collapsed">
         <span class="locoprop-name no-export mr-auto text-left badge badge-info">Uptime </span>
         <span class="locoprop-value">@Model.Uptime</span>
         @*<span class="locoprop-unit no-export"> min</span>*@
     </td>
-    <td onclick="@onclickTD" class="rowalign-items-center">
+    <td onclick="@onclickTD" class="rowalign-items-center my-collapsed">
         @*<span class="locoprop-name no-export mr-auto text-left badge badge-info">Actualiz. </span>*@
         <span class="col-12 locoprop-value">@Model.LastUpdate</span>
     </td>
