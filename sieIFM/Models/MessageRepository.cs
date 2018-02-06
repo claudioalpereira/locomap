@@ -23,7 +23,7 @@ namespace MVCSignalRtest2.Models
                 //using (var command = new SqlCommand(@"SELECT [MessageID], 
                 //[Message], [EmptyMessage], [Date] FROM [dbo].[Messages]", connection))
                 //{
-                using (var command = new SqlCommand(@"SELECT [PK], [LastUpdate], [Loco], [Longitude], [Latitude], [Altitude], [Mileage], [EnergReactCons], [EnergReactDev], [EnergActCons], [EnergActDev], [Uptime], [UnetInst] FROM [dbo].[LocoStatus]", connection))
+                using (var command = new SqlCommand(@"SELECT [PK], [LastGPSUpdate], [LastMeterUpdate], [Loco], [Longitude], [Latitude], [Altitude], [Mileage], [EnergReactCons], [EnergReactDev], [EnergActCons], [EnergActDev], [Uptime], [UnetInst] FROM [dbo].[LocoStatus]", connection))
                 {
 
                     command.Notification = null;
@@ -41,7 +41,8 @@ namespace MVCSignalRtest2.Models
                         messages.Add(item: new LocoStatus
                         {
                             PK = (int)reader["PK"],
-                            LastUpdate = Convert.ToDateTime(reader["LastUpdate"]),
+                            LastGPSUpdate = Convert.ToDateTime(reader["LastGPSUpdate"]),
+                            LastMeterUpdate = Convert.ToDateTime(reader["LastMeterUpdate"]),
                             Loco = (string)reader["Loco"],
                             Longitude = (double)(decimal)reader["Longitude"],
                             Latitude = (double)(decimal)reader["Latitude"],

@@ -8,7 +8,8 @@ namespace MVCSignalRtest2.Models
     public class LocoStatus
     {
         public int PK { get; set; }
-        public DateTime LastUpdate { get; set; }
+        public DateTime LastGPSUpdate { get; set; }
+        public DateTime LastMeterUpdate { get; set; }
         public string Loco { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
