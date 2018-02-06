@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:33:59</publishTime>
     </File>
     <File Include="bin/MVCSignalRtest2.dll">
-      <publishTime>01/19/2018 18:42:08</publishTime>
+      <publishTime>02/06/2018 19:25:53</publishTime>
     </File>
     <File Include="bin/MVCSignalRtest2.pdb">
-      <publishTime>01/19/2018 18:42:08</publishTime>
+      <publishTime>02/06/2018 19:25:53</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>10/04/2017 11:33:18</publishTime>
@@ -298,10 +298,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:34:04</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>10/18/2017 18:40:41</publishTime>
+      <publishTime>02/06/2018 16:52:21</publishTime>
     </File>
     <File Include="Views/Account/Login2.cshtml">
-      <publishTime>10/10/2017 15:41:26</publishTime>
+      <publishTime>02/06/2018 16:51:45</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>09/27/2017 11:34:04</publishTime>
@@ -322,7 +322,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:34:03</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>01/18/2018 17:27:56</publishTime>
+      <publishTime>02/02/2018 11:53:29</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>10/20/2017 19:17:52</publishTime>
@@ -382,10 +382,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2017 18:43:48</publishTime>
     </File>
     <File Include="Views/Shared/_LocoTablePartial.cshtml">
-      <publishTime>01/12/2018 18:18:05</publishTime>
+      <publishTime>02/06/2018 18:31:21</publishTime>
     </File>
     <File Include="Views/Shared/_LocoTableRowPartial.cshtml">
-      <publishTime>01/22/2018 10:39:01</publishTime>
+      <publishTime>02/06/2018 16:48:17</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/20/2017 17:46:37</publishTime>
@@ -397,7 +397,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:33:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/22/2018 10:46:36</publishTime>
+      <publishTime>02/06/2018 19:31:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

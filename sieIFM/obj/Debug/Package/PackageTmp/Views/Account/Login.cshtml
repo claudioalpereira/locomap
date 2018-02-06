@@ -26,9 +26,7 @@
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "" })
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-
+          
                 <button class="btn btn-lg btn-block" type="submit">Log in</button>
 
 }
