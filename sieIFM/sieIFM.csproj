@@ -295,6 +295,7 @@
     <Content Include="Views\Shared\_LocoTablePartial.cshtml" />
     <Content Include="Views\Account\Login2.cshtml" />
     <Content Include="Views\Shared\_LayoutSplash.cshtml" />
+    <Content Include="Views\Account\MyRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
