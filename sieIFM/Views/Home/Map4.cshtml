@@ -214,7 +214,7 @@
     mymap.setView([39.67696, -8.1447127], 7);
     mymap.dragging.disable();
 
-@*
+    @*
     var locoIcon = L.icon({
         iconUrl: '@Url.Content("~/Content/img/train.gif")', //'Content/img/train.gif',
         iconSize: [11, 13], // size of the icon
@@ -222,7 +222,7 @@
         popupAnchor: [0, -6] // point from which the popup should open relative to the iconAnchor
     });
 *@
-@*
+    @*
     var locoIcon = L.icon({
         iconUrl: '@Url.Content("~/Content/img/LE4701_side.png")', //'Content/img/train.gif',
         iconSize: [80, 19], // size of the icon
@@ -231,11 +231,11 @@
     });
 *@
     var locoIcon = L.icon({
-            iconUrl: '@Url.Content("~/Content/img/red-dot.png")',
-            iconSize: [32, 32], // size of the icon
-            iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
-            popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
-        });
+        iconUrl: '@Url.Content("~/Content/img/red-dot.png")',
+        iconSize: [32, 32], // size of the icon
+        iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
+    });
 
     var markers = [];
     var token = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
@@ -260,8 +260,11 @@
 
         marker.setLatLng({ lat: loco.Latitude, lng: loco.Longitude });
         marker.setIcon(locoIcon);
-        marker.bindPopup(loco.Loco);
+        @*https://stackoverflow.com/a/29756761/9230822*@
+        marker.bindPopup('<strong ondblclick="(function(e){$(&apos;.gpsUpdate&apos;).toggle();})()">'+loco.Loco+'</strong><div class="gpsUpdate" style="display:none">'+loco.LastGPSUpdate+'</div>');
         marker.Loco = loco.Loco;
+
+        //L.DomEvent.addListener(marker.label, 'click', function(e) { this.togglePopup() }, marker);
 
         return marker;
     }
@@ -278,6 +281,9 @@
 
         locos.forEach(function (l) {
 
+            if(!l.Latitude || !l.Longitude){
+                return;
+            }
             //var m = markers.find(function (e) { return e.Loco == l.Loco; }); // not supported on IE
             var m = $.grep(markers, function (e) { return e.Loco == l.Loco; })[0];
             if (!m) {
@@ -290,7 +296,7 @@
         });
 
         resetFit();
-@*
+        @*
         var group = new L.featureGroup(markers);
         mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
         mymap.fitBounds(new L.featureGroup(markers).getBounds(), { padding: [0, 0] });
@@ -370,46 +376,64 @@
 
 <script type="text/javascript">
 
-$(function () {
-    // Declare a proxy to reference the hub.
-    var notifications = $.connection.messagesHub;
+    $(function () {
+        // Declare a proxy to reference the hub.
+        var notifications = $.connection.messagesHub;
 
-    //debugger;
-    // Create a function that the hub can call to broadcast messages.
-    notifications.client.updateMessages = function () {
-        getAllMessages();
-    };
-    // Start the connection.
-    $.connection.hub.start().done(function () {
-        console.log("signalr: connection started");
-      //  getAllMessages();
-    }).fail(function (e) {
-        console.log("signalr: "+e);
+        //debugger;
+        // Create a function that the hub can call to broadcast messages.
+        notifications.client.updateMessages = function (lolos) {
+
+            locos = JSON.parse(lolos, dateTimeReviver);
+            console.log(lolos);
+            updateMarkers();
+            updateTable();
+
+            //getAllMessages();
+        };
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+            console.log("signalr: connection started");
+            //  getAllMessages();
+        }).fail(function (e) {
+            console.log("signalr: "+e);
+        });
     });
-});
 
-function getAllMessages()
-{
-    //var tbl = $('#messagesTable');
-    $.ajax({
-        url: '@Url.Action("GetMessages","Home")', //'home/GetMessages',
-        contentType: 'application/html ; charset:utf-8',
-        type: 'GET',
-        dataType: 'html'
-    }).success(function (result) {
+    function getAllMessages()
+    {
+        //var tbl = $('#messagesTable');
+        $.ajax({
+            url: '@Url.Action("GetMessages","Home")', //'home/GetMessages',
+            contentType: 'application/html ; charset:utf-8',
+            type: 'GET',
+            dataType: 'html'
+        }).success(function (result) {
 
-        locos = JSON.parse(result);
-        //console.log(locos);
-        updateMarkers();
-        updateTable();
+            locos = JSON.parse(result, dateTimeReviver);
+            //console.log(locos);
+            updateMarkers();
+            updateTable();
 
-    }).error(function (err) {
-        console.log('signalr: ERROR retrieving data from the server');
-        console.log(err);
-    });
-}
+        }).error(function (err) {
+            console.log('signalr: ERROR retrieving data from the server');
+            console.log(err);
+        });
+    }
 
-getAllMessages();
+    getAllMessages();
+
+    @*https://stackoverflow.com/questions/4511705/how-to-parse-json-to-receive-a-date-object-in-javascript*@
+    dateTimeReviver = function (key, value) {
+        var a;
+        if (typeof value === 'string') {
+            a = /\/Date\((\d*)\)\//.exec(value);
+            if (a) {
+                return new Date(+a[1]);
+            }
+        }
+        return value;
+    }
 
 </script>
 

@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using System.Configuration;
 using Microsoft.AspNet.SignalR.Hubs;
+using Newtonsoft.Json;
 
 namespace MVCSignalRtest2.Hubs
 {
@@ -19,10 +20,11 @@ namespace MVCSignalRtest2.Hubs
         }
 
         [HubMethodName("sendMessages")]
-        public static void SendMessages()
+        public static void SendMessages<T>(IEnumerable<T> list)
         {
+            var json = JsonConvert.SerializeObject(list);
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MessagesHub>();
-            context.Clients.All.updateMessages();
+            context.Clients.All.updateMessages(json);
         }
     }
 }
