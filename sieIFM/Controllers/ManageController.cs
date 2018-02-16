@@ -236,6 +236,13 @@ namespace MVCSignalRtest2.Controllers
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    if (!user.EmailConfirmed)
+                    {
+                        var userManager = SignInManager.UserManager;
+                        var token = await userManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var confirmResult = await userManager.ConfirmEmailAsync(user.Id, token); 
+                    }
                 }
                 //return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
                 return RedirectToAction("Index", "Home");

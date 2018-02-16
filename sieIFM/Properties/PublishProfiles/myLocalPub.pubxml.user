@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:33:59</publishTime>
     </File>
     <File Include="bin/MVCSignalRtest2.dll">
-      <publishTime>02/16/2018 03:22:00</publishTime>
+      <publishTime>02/16/2018 18:33:52</publishTime>
     </File>
     <File Include="bin/MVCSignalRtest2.pdb">
-      <publishTime>02/16/2018 03:22:00</publishTime>
+      <publishTime>02/16/2018 18:33:52</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>10/04/2017 11:33:18</publishTime>
@@ -400,7 +400,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:33:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/16/2018 03:22:30</publishTime>
+      <publishTime>02/16/2018 18:34:03</publishTime>
     </File>
   </ItemGroup>
 </Project>

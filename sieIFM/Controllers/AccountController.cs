@@ -63,7 +63,7 @@ namespace MVCSignalRtest2.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+        
         //
         // POST: /Account/Login
         [HttpPost]
@@ -84,9 +84,18 @@ namespace MVCSignalRtest2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+
                     // register user to allow only one concurrent user login
                     SessionManager.RegisterLogin(new SessionManager.User { UserName = model.Email, SessionId = HttpContext.Session.SessionID });
-                    return RedirectToLocal(returnUrl);
+
+                    // force password change at first login
+                    var user = await UserManager.FindByEmailAsync(model.Email);
+
+                    if (!user.EmailConfirmed)
+                        return RedirectToAction("ChangePassword", "Manage");
+                    else
+                        return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     Logger.Log("User '{0}' locked.", model.Email);
                     return View("Lockout");
