@@ -88,6 +88,7 @@ namespace MVCSignalRtest2.Controllers
                     // register user to allow only one concurrent user login
                     SessionManager.RegisterLogin(new SessionManager.User { UserName = model.Email, SessionId = HttpContext.Session.SessionID });
 
+                    // https://stackoverflow.com/questions/25570025/net-identity-email-username-change
                     // force password change at first login
                     var user = await UserManager.FindByEmailAsync(model.Email);
 

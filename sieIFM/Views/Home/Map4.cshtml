@@ -212,7 +212,14 @@
 
     var mymap = L.map('map', {tap:false});
     mymap.setView([39.67696, -8.1447127], 7);
-    mymap.dragging.disable();
+    
+    //https://www.coalmarch.com/insights/how-to-execute-javascript-based-on-screen-size-using-jquery
+    //if ( $(window).width() > 480) {      
+    //    mymap.dragging.enable();
+    //} 
+    //else {
+    //    mymap.dragging.disable();
+    //}
 
     @*
     var locoIcon = L.icon({
@@ -364,6 +371,29 @@
 
 </script>
 
+<script>
+    @*https://www.fourfront.us/blog/jquery-window-width-and-media-queries*@
+
+    $(document).ready(function() {
+        // run test on initial page load
+        checkSize();
+
+        // run test on resize of the window
+        $(window).resize(checkSize);
+    });
+
+    //Function to the css rule
+    function checkSize(){
+        console.log('resized');
+        if ($(".locoprop-name").css("display") == "table-cell" ){
+            console.log('disable dragging');
+            mymap.dragging.disable();
+        } else {
+            console.log('enable dragging');
+            mymap.dragging.enable();
+        }
+    }
+</script>
 
 @*
     +++++++++++++++++++++++++++++++++++++++++++++
