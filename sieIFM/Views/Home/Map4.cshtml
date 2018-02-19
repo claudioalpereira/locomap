@@ -384,22 +384,11 @@
 
     //Function to the css rule
     function checkSize(){
-        console.log('resized');
-        //if ($(".locoprop-name").css("display") == "table-cell" ){
-        if($( window ).width() < 557){
-            console.log('window: '+$( window ).width());
-            console.log('document: '+$( document ).width());
-            console.log('map-container: '+$( '#map-container' ).width());
-        
-            console.log('disable dragging');
+
+        if($('.device-xs').is(':visible')){
             mymap.dragging.disable();
             mymap.scrollWheelZoom.disable();
         } else {
-            console.log('window: '+$( window ).width());
-            console.log('document: '+$( document ).width());
-            console.log('map-container: '+$( '#map-container' ).width());
-
-            console.log('enable dragging');
             mymap.dragging.enable();
             mymap.scrollWheelZoom.enable();
         }
@@ -518,5 +507,11 @@
 *@
 </script>
 }
+
+
+<div class="device-xs d-block d-sm-none"></div>
+<div class="device-sm d-none d-md-block d-lg-none"></div>
+<div class="device-md d-none d-lg-block d-xl-none"></div>
+<div class="device-lg d-none d-xl-block"></div>
 
 
