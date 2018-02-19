@@ -348,7 +348,7 @@
         var latLngs = [marker.getLatLng()];
         var markerBounds = L.latLngBounds(latLngs);
         mymap.fitBounds(markerBounds);
-        mymap.setZoom(15);
+        mymap.setZoom(17);
         marker.openPopup();
 
     }
@@ -359,7 +359,7 @@
         markers.forEach(function (m) { m.closePopup(); });
 
         var group = new L.featureGroup(markers);
-        mymap.fitBounds(group.getBounds(), { padding: [0, 0] });
+        mymap.fitBounds(group.getBounds(), { padding: [20, 20] });
 
         if (locos.length < 2) {
             mymap.setZoom(11);
