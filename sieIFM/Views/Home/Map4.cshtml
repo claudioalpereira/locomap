@@ -385,12 +385,23 @@
     //Function to the css rule
     function checkSize(){
         console.log('resized');
-        if ($(".locoprop-name").css("display") == "table-cell" ){
+        //if ($(".locoprop-name").css("display") == "table-cell" ){
+        if($( window ).width() < 557){
+            console.log('window: '+$( window ).width());
+            console.log('document: '+$( document ).width());
+            console.log('map-container: '+$( '#map-container' ).width());
+        
             console.log('disable dragging');
             mymap.dragging.disable();
+            mymap.scrollWheelZoom.disable();
         } else {
+            console.log('window: '+$( window ).width());
+            console.log('document: '+$( document ).width());
+            console.log('map-container: '+$( '#map-container' ).width());
+
             console.log('enable dragging');
             mymap.dragging.enable();
+            mymap.scrollWheelZoom.enable();
         }
     }
 </script>
